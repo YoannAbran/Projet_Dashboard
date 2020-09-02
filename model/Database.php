@@ -1,5 +1,5 @@
 <?php
-class Database{
+abstract class Database{
   protected function dbConnect()
   {
     $servername = "127.0.0.1";

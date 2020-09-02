@@ -1,7 +1,5 @@
-<?php
-  ob_start();
-?>
-<form class="container-fluid pt-5 d-flex flex-column align-items-center" action='index.php?action=insertnew' method="post" enctype='multipart/form-data'>
+<?php ob_start();?>
+<form class="container-fluid pt-5 d-flex flex-column align-items-center" action='<?php  htmlspecialchars('index.php?action=insertnew')?>' method="post" enctype='multipart/form-data'>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputNom">Nom</label>
@@ -24,10 +22,10 @@
     </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputlieux_achat">Lieux d'achat</label>
+      <label for="inputlieux_achat_select">Lieux d'achat</label>
       <select id="" class="form-control" name="lieux_achat">
         <option selected>Choose...</option>
-        <option>vente_direct</option>
+        <option>vente direct</option>
         <option>e-commerce</option>
       </select>
     </div>
@@ -68,4 +66,3 @@
 <?php
 $content = ob_get_clean();
  require('template.php');
- ?>

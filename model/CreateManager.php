@@ -1,7 +1,7 @@
 <?php
 class CreateManager extends Database
 {
-  public function addnew($nom,$ref,$date_achat,$date_garantie,$prix,$categorie,$conseil,$adresse){
+  public function addnew($nom,$reference,$date_achat,$date_garantie,$prix,$categorie,$conseil,$direct,$ecommerce){
     $conn = $this->dbConnect();
     $add = $conn->prepare("INSERT INTO livres (nom,reference,date_achat,date_garantie,prix,conseil,photo_ticket,photo,categorie) VALUES (:nom,:reference,:date_achat,:date_garantie,:prix,:conseil,:photo_ticket,:photo,:categorie) ");
 
@@ -24,7 +24,7 @@ class CreateManager extends Database
         }
       }
       $add->bindParam(':nom',$nom);
-      $add->bindParam(':reference',$ref);
+      $add->bindParam(':reference',$reference);
       $add->bindParam(':date_achat',$date_achat);
       $add->bindParam(':date_garantie',$date_garantie);
       $add->bindParam(':prix',$prix);
@@ -34,11 +34,13 @@ class CreateManager extends Database
       $add->bindParam(':categorie',$categorie);
 
       $addnew = $add->execute();
-      $nul ="NUl";
+
       $query="INSERT INTO lieux_achat (vente_direct,ecommerce,id_livre) VALUES(?,?,LAST_INSERT_ID())";
       $addnew = $conn->prepare($query);
-      $addnew->execute(array($adresse,$nul));
+      $addnew->execute(array($direct,$ecommerce));
       return $addnew;
+
     }
+
 }
  ?>
