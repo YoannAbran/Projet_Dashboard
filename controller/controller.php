@@ -77,3 +77,8 @@ function input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+function viewIndex(){
+  $indexManager = new IndexManager;
+  $rows = $indexManager->selectAll();
+  require("view/IndexView.php");
+}

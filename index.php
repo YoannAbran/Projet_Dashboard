@@ -19,5 +19,5 @@ if (isset($_GET['action'])) {
         }
 }
 else{
-  require("view/IndexView.php");
+viewIndex();
 }

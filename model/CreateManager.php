@@ -1,9 +1,9 @@
 <?php
 class CreateManager extends Database
 {
-  public function addnew($nom,$reference,$date_achat,$date_garantie,$prix,$categorie,$conseil,$direct,$ecommerce){
+  public function addnew($nom, $reference, $date_achat, $date_garantie, $prix,$categorie, $conseil, $direct, $ecommerce){
     $conn = $this->dbConnect();
-    $add = $conn->prepare("INSERT INTO livres (nom,reference,date_achat,date_garantie,prix,conseil,photo_ticket,photo,categorie) VALUES (:nom,:reference,:date_achat,:date_garantie,:prix,:conseil,:photo_ticket,:photo,:categorie) ");
+    $add = $conn->prepare("INSERT INTO livres (nom, reference, date_achat, date_garantie, prix,conseil, photo_ticket, photo,categorie) VALUES (:nom,:reference,:date_achat,:date_garantie,:prix,:conseil,:photo_ticket,:photo,:categorie) ");
 
   $ticketname = $_FILES['ticket']['name'];
   $photoname = $_FILES['photo']['name'];
@@ -18,9 +18,9 @@ class CreateManager extends Database
   $file_extension_photo = strtolower($file_extension_photo);
   // Valid image extension
   $valid_extension = array("png","jpeg","jpg","PNG");
-    if(in_array($file_extension_ticket, $valid_extension)&&in_array($file_extension_photo, $valid_extension)){
+    if(in_array($file_extension_ticket, $valid_extension) && in_array($file_extension_photo, $valid_extension)){
      // Upload file
-      if(move_uploaded_file($_FILES['ticket']['tmp_name'],$target_ticket)&&move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
+      if(move_uploaded_file($_FILES['ticket']['tmp_name'],$target_ticket) && move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
         }
       }
       $add->bindParam(':nom',$nom,PDO::PARAM_STR);
