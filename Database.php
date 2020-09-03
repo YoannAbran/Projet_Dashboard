@@ -4,8 +4,8 @@ protected function dbConnect()
 {
 $servername = "127.0.0.1";
 $username = "root";
-$password = "projet_dashboard";
-$dbname = "P";
+$password = "";
+$dbname = "projet_dashboard";
 
 try {
 $conn = new PDO("mysql:host=$servername;port=3306;dbname=$dbname", $username, $password);
