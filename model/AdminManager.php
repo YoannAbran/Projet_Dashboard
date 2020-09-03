@@ -58,26 +58,25 @@ public function isAdmin(){
     exit;
   }
 
-  // public function getRegister($nom,$mail,$password){
-  //   $conn = $this->dbConnect();
-  //   $stmt = $conn->prepare("SELECT * FROM admin where nom=?");
-  //   $stmt->execute([$nom]);
-  //   $noms =$stmt->fetch();
-  //   if($noms){
-  //     echo "<div class='sucess'>Le nom d'utilisateur est déjà utilisé.</div>";
-  //   }
-  //   else {
-  //     $conn = $this->dbConnect();
-  //     $query=$conn->prepare("INSERT INTO admin (nom,mail,password) VALUES(:nom,:mail,:password)");
-  //     $query->execute(array(
-  //       ':nom' => $nom,
-  //       ':mail' => $mail,
-  //       ':password' => password_hash($password, PASSWORD_DEFAULT),
-  //     ));
-  //     echo "<div class='sucess'>
-  //            <h3>Vous êtes inscrit avec succès.</h3>
-  //            <p>Cliquez ici pour vous <a href='index.php?action=login'>connecter</a></p>
-  //      </div>";
-  //   }
-  // }
+  public function getRegister($nom,$mail,$password){
+    $conn = $this->dbConnect();
+    $stmt = $conn->prepare("SELECT * FROM admin where nom=?");
+    $stmt->execute([$nom]);
+    $noms =$stmt->fetch();
+    if($noms){
+      echo "<div class='sucess'>Le nom d'utilisateur est déjà utilisé.</div>";
+    }
+    else {
+      $conn = $this->dbConnect();
+      $query=$conn->prepare("INSERT INTO admin (nom,mail,password) VALUES(:nom,:mail,:password)");
+      $query->execute(array(
+        ':nom' => $nom,
+        ':mail' => $mail,
+        ':password' => password_hash($password, PASSWORD_DEFAULT),
+      ));
+      echo "<div class='sucess'>
+             <h3>Vous avez ajouter un administrateur avec succès.</h3>
+       </div>";
+    }
+  }
 }

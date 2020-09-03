@@ -36,18 +36,25 @@ else{
 }
 }
 
-// function register(){
-//   if (isset($_POST['nom'], $_POST['email'], $_POST['password'])){
-//     // récupérer le nom d'utilisateur et supprimer les antislashes ajoutés par le formulaire
-//     $nom = stripslashes($_POST['nom']);
-//     // récupérer l'email et supprimer les antislashes ajoutés par le formulaire
-//     $mail = stripslashes($_POST['email']);
-//     // récupérer le mot de passe et supprimer les antislashes ajoutés par le formulaire
-//     $password = stripslashes($_POST['password']);
-//     $adminManager = new AdminManager;
-//     $register = $adminManager->getRegister($nom,$mail,$password);
-// }
-// }
+function register(){
+  if (isset($_POST['nom'], $_POST['email'], $_POST['password'])){
+    // récupérer le nom d'utilisateur et supprimer les antislashes ajoutés par le formulaire
+    $nom = input($_POST['nom']);
+    // récupérer l'email et supprimer les antislashes ajoutés par le formulaire
+    $mail = input($_POST['email']);
+    // récupérer le mot de passe et supprimer les antislashes ajoutés par le formulaire
+    $password = input($_POST['password']);
+
+    $valid = filter_var($mail, FILTER_VALIDATE_EMAIL);
+    if($valid==true){
+    $adminManager = new AdminManager;
+    $register = $adminManager->getRegister($nom,$mail,$password);
+  }
+  else{
+    echo "Format mail incorrect";
+  }
+}
+}
 function admin(){
   $adminManager = new AdminManager;
   $admin = $adminManager-> isAdmin();

@@ -23,15 +23,15 @@ class CreateManager extends Database
       if(move_uploaded_file($_FILES['ticket']['tmp_name'],$target_ticket)&&move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
         }
       }
-      $add->bindParam(':nom',$nom);
-      $add->bindParam(':reference',$reference);
+      $add->bindParam(':nom',$nom,PDO::PARAM_STR);
+      $add->bindParam(':reference',$reference,PDO::PARAM_STR);
       $add->bindParam(':date_achat',$date_achat);
       $add->bindParam(':date_garantie',$date_garantie);
       $add->bindParam(':prix',$prix);
-      $add->bindParam(':conseil',$conseil);
-      $add->bindParam(':photo_ticket',$target_ticket);
-      $add->bindParam(':photo',$target_photo);
-      $add->bindParam(':categorie',$categorie);
+      $add->bindParam(':conseil',$conseil,PDO::PARAM_STR);
+      $add->bindParam(':photo_ticket',$target_ticket,PDO::PARAM_STR);
+      $add->bindParam(':photo',$target_photo,PDO::PARAM_STR);
+      $add->bindParam(':categorie',$categorie,PDO::PARAM_STR);
 
       $addnew = $add->execute();
 

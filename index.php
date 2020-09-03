@@ -13,10 +13,10 @@ if (isset($_GET['action'])) {
     else if ($_GET['action'] == 'deco') {
       deconnexion();
           }
-          // else if ($_GET['action'] == 'register') {
-          //   require("view/RegisterView.php");
-          //   register();
-          //     }
+    else if ($_GET['action'] == 'register') {
+      require("view/RegisterView.php");
+      register();
+        }
 }
 else{
   require("view/IndexView.php");

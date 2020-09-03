@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id();
 $title = "dashboard";
  ?>
 <!DOCTYPE html>
@@ -31,13 +32,14 @@ $title = "dashboard";
 
         if (isset($_SESSION['isAdmin'])){
           echo "<li class='nav-item'>
-          <a class='nav-link' href='index.php?action=insertnew'>Ajouter</a>
+          <a class='nav-link' href='index.php?action=insertnew'>Ajouter un produit</a>
+        </li>
+
+       <li class='nav-item'>
+          <a class='nav-link' href='index.php?action=register'>Ajouter un admin</a>
         </li>";
       }
          ?>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="index.php?action=register">Register</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="index.php?action=login">Login</a>
         </li>
