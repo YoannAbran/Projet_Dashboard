@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php ob_start();
+session_start();
+session_regenerate_id();?>
 
 <form class="box" action="<?php htmlspecialchars('index.php?action=register')?>" method="post">
     <h1 class="box-title">Ajouter un admin</h1>

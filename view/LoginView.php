@@ -1,4 +1,7 @@
-<?php  ob_start() ?>
+<?php
+ob_start();
+session_start();
+session_regenerate_id(); ?>
 <form class="box" action="<?php  htmlspecialchars('index.php?action=login')?>" method="post" name="login">
 <h1 class="box-title">Connexion</h1>
 <div class="m-4">

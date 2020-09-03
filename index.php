@@ -17,6 +17,13 @@ if (isset($_GET['action'])) {
       require("view/RegisterView.php");
       register();
         }
+        else if ($_GET['action'] == 'delete') {
+          if (isset($_POST['suppr'])) {
+            if (isset($_GET['idel'])) {
+              deleteControl();
+            }
+          }
+        }
 }
 else{
 viewIndex();

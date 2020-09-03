@@ -19,7 +19,7 @@ function create(){
     else{
       echo "veuillez choisir le lieux d'achat";
     }
-  $editManager = new CreateManager;
+  $createManager = new CreateManager;
   $nom = input($_POST['nom']);
   $reference = input($_POST['reference']);
   $date_achat = input($_POST['date_achat']);
@@ -27,12 +27,12 @@ function create(){
   $prix = input($_POST['prix']);
   $categorie = input($_POST['categorie']);
   $conseil = input($_POST['conseil']);
-  $addnew = $editManager->addnew($nom, $reference,$date_achat,$garantie,$prix,$categorie,$conseil,$direct,$ecommerce);
+  $addnew = $createManager->addnew($nom, $reference,$date_achat,$garantie,$prix,$categorie,$conseil,$direct,$ecommerce);
   header("Location: index.php",true,303);
   exit;
 }
 else{
-  echo "veuillez remplir tout les champs";
+  echo "<p class='alert alert-danger text-center p-2 m-0'>Veuillez renseigner tous les champs</p>";
 }
 }
 
@@ -82,3 +82,11 @@ function viewIndex(){
   $rows = $indexManager->selectAll();
   require("view/IndexView.php");
 }
+function deleteControl(){
+    if (isset($_GET['idel'])) {
+      $indexManager = new IndexManager;
+      $del = $indexManager->delete($_GET['idel']);
+    }
+    header('Location: index.php');
+    exit;
+  }
