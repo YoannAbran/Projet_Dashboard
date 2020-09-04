@@ -24,6 +24,13 @@ if (isset($_GET['action'])) {
             }
           }
         }
+        else if(isset($_GET['action'])){
+          if ($_GET['action']=='edit'){
+
+            edit();
+          
+          }
+        }
 }
 else{
 viewIndex();

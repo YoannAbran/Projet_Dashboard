@@ -71,12 +71,7 @@ function deconnexion(){
   $adminManager = new AdminManager;
   $deco = $adminManager->deco();
 }
-function input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
+
 function viewIndex(){
   $indexManager = new IndexManager;
   $rows = $indexManager->selectAll();
@@ -90,3 +85,32 @@ function deleteControl(){
     header('Location: index.php');
     exit;
   }
+
+  function edit(){
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
+      $editManager= new EditManager;
+    if(isset($_POST['edit'])){
+
+      if($_POST['lieux_achat'] == 'vente direct'){
+        $direct = input($_POST['adresse']);
+        $ecommerce = '';
+      }
+      elseif ($_POST['lieux_achat'] == 'e-commerce') {
+        $direct = '';
+        $ecommerce = input($_POST['adresse']);
+      }
+      else{
+        echo "veuillez choisir le lieux d'achat";
+      }
+    $edit = $editManager->update($_GET['id'],$_POST['nom'], $_POST['reference'], $_POST['date_achat'], $_POST['date_garantie'], $_POST['prix'], $_POST['conseil'], $_POST['categorie'],$direct,$ecommerce);
+  }
+  $texts = $editManager->edittext($_GET['id']);
+    require("view/EditView.php");
+  }
+}
+function input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}

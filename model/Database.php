@@ -1,6 +1,6 @@
 <?php
 abstract class Database{
-  protected static function dbConnect()
+  protected function dbConnect()
   {
     $servername = "127.0.0.1";
     $username = "root";
