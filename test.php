@@ -1,45 +1,93 @@
 <?php
 require('controller/controller.php');
 class testgraph extends Database {
-  public function test(){
+  public function testcat(){
 $conn = $this->dbConnect();
-$sql = $conn->prepare("SELECT SUM(prix)AS prixcat, categorie FROM livres GROUP BY categorie ");
+$sql = $conn->prepare("SELECT ROUND(SUM(prix),2) AS prixcat, categorie FROM livres GROUP BY categorie ");
 $sql->execute();
 $prix=$sql->fetchAll();
 return $prix;
-}}
-class testtotal extends Database {
-  public function test(){
+}
+
+public function testtot(){
 $db=$this->dbConnect();
-$sql = $db->prepare("SELECT SUM(prix) AS prixtotal FROM livres");
+$sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres");
 $sql->execute();
 $prixtot=$sql->fetch();
 return $prixtot;
+}
 
-}}
+public function teststock(){
+  $prix_vente=8;
+  $nbrevente=1;
+$db=$this->dbConnect();
+$sql = $db->prepare("SELECT COUNT(*) AS nomC, livres.nom, vente.nom AS vnom FROM livres INNER JOIN vente
+GROUP BY livres.nom");
+$sql->execute();
+$nbrenom=$sql->fetchAll();
+foreach ($nbrenom as $nom) {
+  $lnom =$nom['nom'];
+  $vnom = $nom['vnom'];
 
-function testctot(){
-$test=new testtotal;
-$prix=$test->test();
+
+if ($lnom==$vnom){
+$sql = $db->prepare("UPDATE vente SET stock =:stock, prix_vente=:prix_vente,nbre_vente=:nbre_vente");
+$sql->bindParam(':stock',$nom['nomC']);
+$sql->bindParam(':prix_vente',$prix_vente);
+$sql->bindParam(':nbre_vente',$nbrevente);
+foreach ($nbrenom as $nom) {
+  $insertnom=$sql->execute();
+}
+  return $insertnom;
+}
+else {
+  $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (?,?,?,?) ");
+  foreach ($nbrenom as $nom) {
+    $insertnom=$sql->execute(array($nom['nom'],$nom['nomC'],$prix_vente,$nbrevente));
+
+  }
+return $insertnom;
+}
+}
+
+
+}
+
+}
+function testctotgraph(){
+$test=new testgraph;
+$prix=$test->testtot();
 echo $prix['prixtotal'];
 }
-function testcat(){
+function testcatgraph(){
 $test=new testgraph;
-$prix=$test->test();
+$prix=$test->testcat();
 foreach ($prix as $pri) {
   echo "'".$pri['categorie']."',";
 }
 }
 function testprix(){
 $test=new testgraph;
-$prix=$test->test();
+$prix=$test->testcat();
 foreach ($prix as $pri) {
   echo $pri['prixcat'].",";
 }
 }
-echo testprix();
-echo testcat();
-echo testctot();
+
+// Stock vente
+function nbrenom(){
+$test=new testgraph;
+$noms=$test->teststock();
+
+}
+
+
+echo testprix()."<br>";
+echo testcatgraph()."<br>";
+echo testctotgraph()."<br>";
+
+ // echo nbrenom();
+ nbrenom();
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +113,7 @@ type: 'pie',
 
 // The data for our dataset
 data: {
-  labels: [<?php echo testcat();?>],/*'total'*/
+  labels: [<?php echo testcatgraph();?>],/*'total'*/
   datasets: [{
       label: 'cout',
       data: [<?php echo testprix(); ?>],/*echo testctot();*/
