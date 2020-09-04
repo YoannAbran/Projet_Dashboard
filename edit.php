@@ -18,7 +18,7 @@ class edit extends Database{
   }
 
 
-public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $photo_ticket, $photo, $categorie){
+public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie){
 
 // if(isset($_POST['edit'])) {
 //   $nom = $_POST['nom'];
@@ -34,15 +34,15 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
 
   $conn = $this->dbConnect();
   $stmt =$conn->prepare("UPDATE `livres` SET
-    nom = :nom,
-    reference = :reference,
-    date_achat = :date_achat,
-    date_garantie = :date_garantie,
-    prix = :prix,
-    conseil = :conseil,
-    photo_ticket = :photo_ticket,
-    photo = :photo,
-    categorie = :categorie,
+     nom = :nom,
+     reference = :reference,
+     date_achat = :date_achat,
+     date_garantie = :date_garantie,
+     prix = :prix,
+     conseil = :conseil,
+    -- photo_ticket = :photo_ticket,
+    -- photo = :photo,
+     categorie = :categorie
     ");
     $stmt->bindParam(':nom',$nom);
     $stmt->bindParam(':reference',$reference);
@@ -50,21 +50,11 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
     $stmt->bindParam(':date_garantie',$date_garantie);
     $stmt->bindParam(':prix',$prix);
     $stmt->bindParam(':conseil',$conseil);
-    $stmt->bindParam(':photo_ticket',$photo_ticket);
-    $stmt->bindParam(':photo',$photo);
+    // $stmt->bindParam(':photo_ticket',$photo_ticket);
+    // $stmt->bindParam(':photo',$photo);
     $stmt->bindParam(':categorie',$categorie);
 
-    $updatefunc=$stmt->execute(array(
-    ':nom' => $nom,
-    ':reference' => $reference,
-    ':date_achat' => $date_achat,
-    ':date_garantie' => $date_garantie,
-    ':prix' => $prix,
-    ':conseil' => $conseil,
-    ':photo_ticket' => $photo_ticket,
-    ':photo' => $photo,
-    ':categorie' => $categorie,
-  ));
+    $updatefunc=$stmt->execute();
 
   echo"<font color = 'green'><br>Book's info UPDATED</font>";
   return $updatefunc;

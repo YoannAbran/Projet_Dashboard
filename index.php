@@ -34,9 +34,9 @@ if(isset($_GET['action'])){
       <ul>
         <li><p>Nom : <input type="text" name="nom" value=""/></p></li>
 
-        <li><p>Date d'achat : <input type="text" name="date_achat" value=""/></p></li>
+        <li><p>Date d'achat : <input type="date" name="date_achat" value=""/></p></li>
 
-        <li><p>Date de garantie : <input type="text" name="date_garantie" value=""/></p></li>
+        <li><p>Date de garantie : <input type="date" name="date_garantie" value=""/></p></li>
 
         <li><p>Prix : <input type="text" name="prix" value=""/></p></li>
 
