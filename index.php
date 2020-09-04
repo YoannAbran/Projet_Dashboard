@@ -15,6 +15,7 @@ echo "<br>" . "<br>";
 if(isset($_GET['action'])){
   if ($_GET['action']=='edit'){
     controledit();
+echo "";
   }
 }
 ?>
@@ -30,7 +31,7 @@ if(isset($_GET['action'])){
 
 
 
-    <form name="edition" method="post" action="index.php?action=edit">
+    <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit">
       <ul>
         <li><p>Nom : <input type="text" name="nom" value=""/></p></li>
 
@@ -50,9 +51,21 @@ if(isset($_GET['action'])){
 
         <li><p>référence : <input type='text' name="reference" value=""/></p></li>
 
+        <!-- <li><p>id : <input type='number' name="id" value=""/></p></li> -->
+
         <li><p><input type="submit" name="edit" value="Edit"/><p><li>
       </ul>
     </form>
+
+<!-- displaying images from the table -->
+    <div>
+      <div id=phototicket>
+        <img src="source.php?id=1"/>
+      </div>
+      <div id=photo>
+        <img src="source.php?id=1"/>
+      </div>
+    </div>
 
   </body>
 

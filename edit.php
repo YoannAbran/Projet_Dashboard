@@ -40,8 +40,8 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
      date_garantie = :date_garantie,
      prix = :prix,
      conseil = :conseil,
-    -- photo_ticket = :photo_ticket,
-    -- photo = :photo,
+     -- photo_ticket = :photo_ticket,
+     -- photo = :photo,
      categorie = :categorie
     ");
     $stmt->bindParam(':nom',$nom);
@@ -59,6 +59,34 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
   echo"<font color = 'green'><br>Book's info UPDATED</font>";
   return $updatefunc;
 }
+}
+
+//image management for edition
+public function editimg($photo_ticket, $photo){
+
+  $edit3 = $conn->prepare("UPDATE from `livres` SET ")
+  $ticketname = $_FILES['photo_ticket']['name'];
+  $photoname = $_FILES['photo']['name']
+
+  $target_ticket = 'img/'.$ticketname;
+  $target_photo = 'img/'.$photoname;
+
+
+  $file_extension_photo_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
+  $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);
+  $file_extension_photo_ticket = strtolower($file_extension_photo_ticket);
+  $file_extension_photo = strtolower($file_extension_photo);
+
+  $updateimg->execute();
+  return $updateimg;
+
+  $check = mysqli_stmt_affected_rows($stmt);
+  if($check==1){
+      $msg = 'Images Updated to the table';
+  }else{
+      $msg = 'An error about the images occured' ;
+  }
+  // mysqli_close($con);
 }
 
 ?>
