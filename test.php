@@ -1,6 +1,6 @@
 <?php
 require('controller/controller.php');
-class test extends Database {
+class testgraph extends Database {
   public function test(){
 $conn = $this->dbConnect();
 $sql = $conn->prepare("SELECT SUM(prix)AS prixcat, categorie FROM livres GROUP BY categorie ");
@@ -24,14 +24,14 @@ $prix=$test->test();
 echo $prix['prixtotal'];
 }
 function testcat(){
-$test=new test;
+$test=new testgraph;
 $prix=$test->test();
 foreach ($prix as $pri) {
   echo "'".$pri['categorie']."',";
 }
 }
 function testprix(){
-$test=new test;
+$test=new testgraph;
 $prix=$test->test();
 foreach ($prix as $pri) {
   echo $pri['prixcat'].",";
@@ -61,14 +61,14 @@ echo testctot();
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 // The type of chart we want to create
-type: 'line',
+type: 'pie',
 
 // The data for our dataset
 data: {
-  labels: [<?php echo testcat();?>'total'],
+  labels: [<?php echo testcat();?>],/*'total'*/
   datasets: [{
       label: 'cout',
-      data: [<?php echo testprix(); echo testctot();?>],
+      data: [<?php echo testprix(); ?>],/*echo testctot();*/
       backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
