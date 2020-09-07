@@ -51,7 +51,7 @@ echo "";
 
         <li><p>référence : <input type='text' name="reference" value=""/></p></li>
 
-        <!-- <li><p>id : <input type='number' name="id" value=""/></p></li> -->
+        <li><p>id : <input type='number' name="id" value=""/></p></li>
 
         <li><p><input type="submit" name="edit" value="Edit"/><p><li>
       </ul>
@@ -60,10 +60,12 @@ echo "";
 <!-- displaying images from the table -->
     <div>
       <div id=phototicket>
-        <img src="source.php?id=1"/>
+        <!-- <img src="source.php?id=1"/> -->
+        <?php echo "<img src='./public/img" . $row['photo_ticket'] . "'>"?>
       </div>
       <div id=photo>
-        <img src="source.php?id=1"/>
+        <!-- <img src="source.php?id=1"/> -->
+        <?php echo "<img src='" . $row['photo'] . "'>"?>
       </div>
     </div>
 

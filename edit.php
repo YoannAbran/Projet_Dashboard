@@ -18,7 +18,7 @@ class edit extends Database{
   }
 
 
-public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie){
+public function editor($id, $nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie){
 
 // if(isset($_POST['edit'])) {
 //   $nom = $_POST['nom'];
@@ -34,6 +34,7 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
 
   $conn = $this->dbConnect();
   $stmt =$conn->prepare("UPDATE `livres` SET
+     id = :id,
      nom = :nom,
      reference = :reference,
      date_achat = :date_achat,
@@ -44,6 +45,7 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
      -- photo = :photo,
      categorie = :categorie
     ");
+    $stmt->bindParam(':id',$id);
     $stmt->bindParam(':nom',$nom);
     $stmt->bindParam(':reference',$reference);
     $stmt->bindParam(':date_achat',$date_achat);
@@ -62,11 +64,11 @@ public function editor($nom, $reference, $date_achat, $date_garantie, $prix, $co
 }
 
 //image management for edition
-public function editimg($photo_ticket, $photo){
+ function editimg($photo_ticket, $photo){
 
-  $edit3 = $conn->prepare("UPDATE from `livres` SET ")
+  $edit3 = $conn->prepare("UPDATE from `livres` SET photo_ticket = :photo_ticket, photo = :photo");
   $ticketname = $_FILES['photo_ticket']['name'];
-  $photoname = $_FILES['photo']['name']
+  $photoname = $_FILES['photo']['name'];
 
   $target_ticket = 'img/'.$ticketname;
   $target_photo = 'img/'.$photoname;
@@ -80,13 +82,27 @@ public function editimg($photo_ticket, $photo){
   $updateimg->execute();
   return $updateimg;
 
-  $check = mysqli_stmt_affected_rows($stmt);
-  if($check==1){
-      $msg = 'Images Updated to the table';
-  }else{
-      $msg = 'An error about the images occured' ;
+//   $check = mysqli_stmt_affected_rows($stmt);
+//   if($check==1){
+//       $msg = 'Images Updated to the table';
+//   }else{
+//       $msg = 'An error about the images occured' ;
+//   }
+//   // mysqli_close($con);
+// }
+$valid_extension = array("png","jpeg","jpg","PNG");
+    if(in_array($file_extension_ticket, $valid_extension) && in_array($file_extension_photo, $valid_extension)){
+     // Upload file
+      if(move_uploaded_file($_FILES['phototicket']['tmp_name'],$target_ticket) && move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
   }
-  // mysqli_close($con);
+}
+
+  $edit3->bindParam(':photo_ticket',$photo_ticket, PDO::PARAM_STR);
+  $edit3->bindParam(':photo',$photo, PDO::PARAM_STR);
+
+  $editnew = $edit3->execute();
+
+  return $editnew;
 }
 
 ?>
