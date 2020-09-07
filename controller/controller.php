@@ -28,8 +28,10 @@ function create(){
   $categorie = input($_POST['categorie']);
   $conseil = input($_POST['conseil']);
   $addnew = $createManager->addnew($nom, $reference,$date_achat,$garantie,$prix,$categorie,$conseil,$direct,$ecommerce);
+  addvente();
   header("Location: index.php",true,303);
   exit;
+
 }
 else{
   echo "<p class='alert alert-danger text-center p-2 m-0'>Veuillez renseigner tous les champs</p>";
@@ -55,10 +57,12 @@ function register(){
   }
 }
 }
+
 function admin(){
   $adminManager = new AdminManager;
   $admin = $adminManager-> isAdmin();
 }
+
 function loginConnexion(){
   $adminManager = new AdminManager;
   if (isset($_POST["user"]) && isset($_POST["password"])){
@@ -67,6 +71,7 @@ function loginConnexion(){
     $adminManager->getLogin($user,$password);
 }
 }
+
 function deconnexion(){
   $adminManager = new AdminManager;
   $deco = $adminManager->deco();
@@ -77,6 +82,7 @@ function viewIndex(){
   $rows = $indexManager->selectAll();
   require("view/IndexView.php");
 }
+
 function deleteControl(){
     if (isset($_GET['idel'])) {
       $indexManager = new IndexManager;
@@ -107,6 +113,19 @@ function deleteControl(){
   $texts = $editManager->edittext($_GET['id']);
     require("view/EditView.php");
   }
+}
+function addvente(){
+  $test=new testgraph;
+  $noms=$test->teststock();
+  $nomvente=$test->getnomvente();
+  foreach ($nomvente as $nomv) {
+    $nomve=$nomv['nom'];
+  }
+foreach ($noms as $vente) {
+  $nom=$vente['nom'];
+  $stock=$vente['nomC'];
+  $test->insertvente($nom,$stock);
+}
 }
 function input($data) {
   $data = trim($data);

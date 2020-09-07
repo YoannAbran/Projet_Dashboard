@@ -1,6 +1,9 @@
 <?php
 require('controller/controller.php');
+
+
 class testgraph extends Database {
+  //work, recupere la somme des prix pae categorie
   public function testcat(){
 $conn = $this->dbConnect();
 $sql = $conn->prepare("SELECT ROUND(SUM(prix),2) AS prixcat, categorie FROM livres GROUP BY categorie ");
@@ -8,7 +11,7 @@ $sql->execute();
 $prix=$sql->fetchAll();
 return $prix;
 }
-
+//work, recupere le prix total des livres
 public function testtot(){
 $db=$this->dbConnect();
 $sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres");
@@ -16,49 +19,73 @@ $sql->execute();
 $prixtot=$sql->fetch();
 return $prixtot;
 }
-
+//recupere combien et le nombre de livre par nom
 public function teststock(){
-  $prix_vente=8;
-  $nbrevente=1;
 $db=$this->dbConnect();
-$sql = $db->prepare("SELECT COUNT(*) AS nomC, livres.nom, vente.nom AS vnom FROM livres INNER JOIN vente
-GROUP BY livres.nom");
+$sql = $db->prepare("SELECT COUNT(*) AS nomC, nom FROM livres
+GROUP BY nom");
 $sql->execute();
 $nbrenom=$sql->fetchAll();
-foreach ($nbrenom as $nom) {
-  $lnom =$nom['nom'];
-  $vnom = $nom['vnom'];
-
-
-if ($lnom==$vnom){
-$sql = $db->prepare("UPDATE vente SET stock =:stock, prix_vente=:prix_vente,nbre_vente=:nbre_vente");
-$sql->bindParam(':stock',$nom['nomC']);
-$sql->bindParam(':prix_vente',$prix_vente);
-$sql->bindParam(':nbre_vente',$nbrevente);
-foreach ($nbrenom as $nom) {
-  $insertnom=$sql->execute();
-}
-  return $insertnom;
-}
-else {
-  $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (?,?,?,?) ");
-  foreach ($nbrenom as $nom) {
-    $insertnom=$sql->execute(array($nom['nom'],$nom['nomC'],$prix_vente,$nbrevente));
-
-  }
-return $insertnom;
-}
+return $nbrenom;
 }
 
-
+//recup tout dans la table vente_direct
+public function getnomvente(){
+  $db=$this->dbConnect();
+$sql = $db->prepare("SELECT * FROM vente");
+$sql->execute();
+$nomvente=$sql->fetchAll();
+return $nomvente;
 }
 
+//insert nouveau livre dans la table vente update si le livre existe deja
+public function insertvente($nom,$stock){
+  $db=$this->dbConnect();
+  $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (:nom,:stock,:prix_vente,:nbre_vente)
+  ON DUPLICATE KEY UPDATE stock = :stock, prix_vente = :prix_vente, nbre_vente = :nbre_vente");
+  $prix_vente=rand(6,12);
+  $nbrevente=rand(3,20);
+  $add=$sql->execute(array(
+      ':nom'=>$nom,
+      ':stock'=>$stock,
+      ':prix_vente'=>$prix_vente,
+      ':nbre_vente'=>$nbrevente
+  ));
+  return $add;
 }
+
+//recup et calcul le nombre de vente et le prix total des vente par livre
+public function gettotalvente(){
+  $db=$this->dbConnect();
+  $sql = $db->prepare("SELECT ROUND(SUM(prix_vente),2) AS prix_vente,ROUND(SUM(nbre_vente),2) AS nbre_vente FROM vente");
+  $sql->execute();
+  $totalvente=$sql->fetch();
+  return $totalvente;
+}
+}
+
+//recup le nombre de vente total
+function nbretotalvente(){
+  $test=new testgraph;
+  $totalvente=$test->gettotalvente();
+  echo $totalvente['nbre_vente'];
+}
+
+// recup le prix total des vente
+function prixtotalvente(){
+  $test=new testgraph;
+  $totalvente=$test->gettotalvente();
+    echo $totalvente['prix_vente']*$totalvente['nbre_vente'];
+}
+
+//recup le prix total d'achat
 function testctotgraph(){
 $test=new testgraph;
 $prix=$test->testtot();
 echo $prix['prixtotal'];
 }
+
+//recup les categorie
 function testcatgraph(){
 $test=new testgraph;
 $prix=$test->testcat();
@@ -66,6 +93,8 @@ foreach ($prix as $pri) {
   echo "'".$pri['categorie']."',";
 }
 }
+
+//recup prix total d'achat par categorie
 function testprix(){
 $test=new testgraph;
 $prix=$test->testcat();
@@ -74,20 +103,80 @@ foreach ($prix as $pri) {
 }
 }
 
-// Stock vente
+// liste par nom + nombre de livre avec le meme nom
 function nbrenom(){
 $test=new testgraph;
 $noms=$test->teststock();
-
+foreach ($noms as $nom) {
+  echo $nom['nom']."/";
+echo $nom['nomC'].";";
+}
 }
 
+//recup tout dans la table vente
+function nomvente(){
+$test=new testgraph;
+$nomvente=$test->getnomvente();
+foreach ($nomvente as $vente) {
+  echo  $vente['nom'].",";
+  echo $vente['stock'].",";
+    echo $vente['prix_vente'].",";
+    echo $vente['nbre_vente'].",";
+    echo $vente['prix_vente']*$vente['nbre_vente']."/";
+}
+}
 
-echo testprix()."<br>";
-echo testcatgraph()."<br>";
-echo testctotgraph()."<br>";
+//recup le nom des livre ds la table vente
+function labelvente(){
+  $test=new testgraph;
+  $nomvente=$test->getnomvente();
+  foreach ($nomvente as $vente) {
+    echo  "'".$vente['nom']."',";
+  }
+}
 
- // echo nbrenom();
- nbrenom();
+//recup le nombre de vente
+function nbrevente(){
+  $test=new testgraph;
+  $nomvente=$test->getnomvente();
+  foreach ($nomvente as $vente) {
+    echo  $vente['nbre_vente'].",";
+  }
+}
+
+//recupère le prix total des vente par livre
+function vente(){
+  $test=new testgraph;
+  $nomvente=$test->getnomvente();
+  foreach ($nomvente as $vente) {
+    echo  $vente['prix_vente']*$vente['nbre_vente'].",";
+  }
+}
+
+//fonction pour mettre a jour table vente
+// function addvente(){
+//   $test=new testgraph;
+//   $noms=$test->teststock();
+//   $nomvente=$test->getnomvente();
+//   foreach ($nomvente as $nomv) {
+//     $nomve=$nomv['nom'];
+//   }
+// foreach ($noms as $vente) {
+//   $nom=$vente['nom'];
+//   $stock=$vente['nomC'];
+//   $test->insertvente($nom,$stock);
+// }
+// }
+
+
+// echo testprix()."<br>";
+// echo testcatgraph()."<br>";
+// echo testctotgraph()."<br>";
+echo nomvente()."<br>";
+// echo nbrenom()."<br>";
+// addvente();
+echo nbretotalvente()."<br>";
+echo prixtotalvente()."<br>";
 ?>
 
 <!DOCTYPE html>
@@ -102,15 +191,25 @@ echo testctotgraph()."<br>";
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
+<div class="container-fluid d-flex">
+  <div class="container">
+    <canvas id="myChart" ></canvas>
+  </div>
+  <div class="container">
+    <canvas id="myChart2" ></canvas>
+  </div>
+  <div class="container">
+    <canvas id="myChart3" ></canvas>
+  </div>
+</div>
 
-  <canvas id="myChart" width="500px" height="100px" ></canvas>
 
 <script>
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 // The type of chart we want to create
 type: 'pie',
-
 // The data for our dataset
 data: {
   labels: [<?php echo testcatgraph();?>],/*'total'*/
@@ -134,10 +233,74 @@ data: {
 
   }]
 },
+// Configuration options go here
+options: {}
+});
+
+var ctx = document.getElementById('myChart2').getContext('2d');
+var chart = new Chart(ctx, {
+// The type of chart we want to create
+type: 'line',
+// The data for our dataset
+data: {
+  labels: [<?php echo labelvente();?>],/*'total'*/
+  datasets: [{
+      label: 'nombre de vente',
+      data: [<?php echo nbrevente(); ?>],/*echo testctot();*/
+      backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(0, 192, 50, 0.2)',
+      ],
+      borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(1, 200, 50, 1)',
+      ],
+
+  }]
+},
+// Configuration options go here
+options: {}
+});
+
+var ctx = document.getElementById('myChart3').getContext('2d');
+var chart = new Chart(ctx, {
+// The type of chart we want to create
+type: 'bar',
+
+// The data for our dataset
+data: {
+  labels: [<?php echo labelvente();?>],/*'total'*/
+  datasets: [{
+      label: 'total des vente en €',
+      data: [<?php echo vente(); ?>],/*echo testctot();*/
+      backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(0, 192, 50, 0.2)',
+      ],
+      borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(1, 200, 50, 1)',
+      ],
+
+  }]
+},
 
 // Configuration options go here
 options: {}
 });
+
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
