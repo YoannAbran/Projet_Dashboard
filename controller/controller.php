@@ -78,14 +78,14 @@ function deconnexion(){
 }
 
 function viewIndex(){
-  $indexManager = new IndexManager;
+  $indexManager = new IndexManagerTest;
   $rows = $indexManager->selectAll();
-  require("view/IndexView.php");
+  require("view/IndexViewTest.php");
 }
 
 function deleteControl(){
     if (isset($_GET['idel'])) {
-      $indexManager = new IndexManager;
+      $indexManager = new IndexManagerTest;
       $del = $indexManager->delete($_GET['idel']);
     }
     header('Location: index.php');
@@ -94,7 +94,7 @@ function deleteControl(){
 
   function edit(){
     if (isset($_GET['id']) && $_GET['id'] > 0) {
-      $editManager= new EditManager;
+      $editManager= new EditManagerTest;
     if(isset($_POST['edit'])){
 
       if($_POST['lieux_achat'] == 'vente direct'){
@@ -111,7 +111,7 @@ function deleteControl(){
     $edit = $editManager->update($_GET['id'],$_POST['nom'], $_POST['reference'], $_POST['date_achat'], $_POST['date_garantie'], $_POST['prix'], $_POST['conseil'], $_POST['categorie'],$direct,$ecommerce);
   }
   $texts = $editManager->edittext($_GET['id']);
-    require("view/EditView.php");
+    require("view/EditViewTest.php");
   }
 }
 function addvente(){

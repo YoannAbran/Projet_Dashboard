@@ -1,5 +1,5 @@
 <?php
-class EditManager extends Database
+class EditManagerTest extends Database
 {
 public function update($id,$nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie,$direct,$ecommerce){
   $conn = $this->dbConnect();

@@ -1,5 +1,5 @@
 <?php
-class IndexManager extends Database
+class IndexManagerTest extends Database
 {
 
   public function selectAll(){
