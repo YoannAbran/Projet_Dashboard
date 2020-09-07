@@ -28,7 +28,7 @@ $sql->execute();
 $nbrenom=$sql->fetchAll();
 return $nbrenom;
 }
-
+//recup tout dans la table vente_direct
 public function getnomvente(){
   $db=$this->dbConnect();
 $sql = $db->prepare("SELECT nom FROM vente");
@@ -36,7 +36,7 @@ $sql->execute();
 $nomvente=$sql->fetchAll();
 return $nomvente;
 }
-
+//insert nouveau livre dans la table vente update si le livre existe deja
 public function insertvente($nom,$stock){
   $db=$this->dbConnect();
   $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (:nom,:stock,:prix_vente,:nbre_vente)

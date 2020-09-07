@@ -62,8 +62,25 @@ public function gettotalvente(){
   $totalvente=$sql->fetch();
   return $totalvente;
 }
+//recup mois annee table livres
+public function getmonth(){
+  $db=$this->dbConnect();
+  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year FROM livres GROUP BY mois ");
+  $sql->execute();
+  $month=$sql->fetchAll();
+  return $month;
 }
+}//fin CLASS
 
+//recup mois
+function recupmonth(){
+  $test = new testgraph;
+  $month = $test->getmonth();
+  foreach ($month as $mois) {
+    echo $mois['mois'].",";
+    echo $mois['year']."/";
+  }
+}
 //recup le nombre de vente total
 function nbretotalvente(){
   $test=new testgraph;
@@ -177,6 +194,7 @@ echo nomvente()."<br>";
 // addvente();
 echo nbretotalvente()."<br>";
 echo prixtotalvente()."<br>";
+echo recupmonth()."<br>";
 ?>
 
 <!DOCTYPE html>
@@ -232,7 +250,7 @@ options: {}
 var ctx = document.getElementById('myChart2').getContext('2d');
 var chart = new Chart(ctx, {
 // The type of chart we want to create
-type: 'line',
+type: 'doughnut',
 // The data for our dataset
 data: {
   labels: [<?php echo labelvente();?>],/*'total'*/
