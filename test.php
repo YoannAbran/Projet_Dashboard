@@ -216,20 +216,12 @@ data: {
   datasets: [{
       label: 'cout',
       data: [<?php echo testprix(); ?>],/*echo testctot();*/
-      backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(0, 192, 50, 0.2)',
-      ],
-      borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(1, 200, 50, 1)',
-      ],
+      backgroundColor:
+          poolColors([<?php echo testcatgraph(); ?>].length),
+
+      borderColor:
+          poolColors([<?php echo testcatgraph(); ?>].length),
+
 
   }]
 },
@@ -247,20 +239,12 @@ data: {
   datasets: [{
       label: 'nombre de vente',
       data: [<?php echo nbrevente(); ?>],/*echo testctot();*/
-      backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(0, 192, 50, 0.2)',
-      ],
-      borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(1, 200, 50, 1)',
-      ],
+      backgroundColor:
+          poolColors([<?php echo nbrevente(); ?>].length),
+
+      borderColor:
+          poolColors([<?php echo nbrevente(); ?>].length),
+
 
   }]
 },
@@ -279,20 +263,9 @@ data: {
   datasets: [{
       label: 'total des vente en €',
       data: [<?php echo vente(); ?>],/*echo testctot();*/
-      backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(0, 192, 50, 0.2)',
-      ],
-      borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(1, 200, 50, 1)',
-      ],
+      backgroundColor: poolColors([<?php echo vente(); ?>].length),
+      borderColor:
+          poolColors([<?php echo vente(); ?>].length),
 
   }]
 },
@@ -300,7 +273,21 @@ data: {
 // Configuration options go here
 options: {}
 });
-
+//random color rgba
+function dynamicColors() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return "rgba(" + r + "," + g + "," + b + ", 0.5)";
+}
+//color with array.lenght for graph
+function poolColors(a) {
+    var pool = [];
+    for(i = 0; i < a; i++) {
+        pool.push(dynamicColors());
+    }
+    return pool;
+}
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
