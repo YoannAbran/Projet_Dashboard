@@ -31,7 +31,12 @@ $title = "dashboard";
         <?php
 
         if (isset($_SESSION['isAdmin'])){
-          echo "<li class='nav-item'>
+          echo "
+          <li class='nav-item'>
+             <a class='nav-link' href='index.php?action=listbook'>Liste des livres</a>
+           </li>
+
+          <li class='nav-item'>
           <a class='nav-link' href='index.php?action=insertnew'>Ajouter un produit</a>
         </li>
 

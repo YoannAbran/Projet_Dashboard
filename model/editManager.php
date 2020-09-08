@@ -5,9 +5,9 @@ WHERE id='7' -->
 <?php
 
 // Table Editor
-require 'Database.php';
 
-class edit extends Database{
+
+class editManager extends Database{
   public function selectAll(){
   $conn = $this->dbConnect();
   $sql = $conn->prepare("SELECT *

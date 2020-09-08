@@ -89,6 +89,7 @@ foreach ($noms as $vente) {
   $stock=$vente['nomC'];
   $test->insertvente($nom,$stock);
 }
+}
 function controledit(){
   if(isset($_POST['edit'])) {
     $nom =input($_POST['nom']);
@@ -102,11 +103,27 @@ function controledit(){
     $edit2 = $edit -> editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
 }
 }
+
 function controleditimg() {
-    $edit = new edit;
+    $edit = new editManager;
     $pictures = $edit-> editimg();
 }
+
+function viewList(){
+  $indexManager = new ListManager;
+  $rows = $indexManager->selectAll();
+  require("view/ListView.php");
 }
+
+function deleteControl(){
+    if (isset($_GET['idel'])) {
+      $indexManager = new ListManager;
+      $del = $indexManager->delete($_GET['idel']);
+    }
+    header('Location: index.php?action=listbook');
+    exit;
+  }
+
 function input($data) {
   $data = trim($data);
   $data = stripslashes($data);
