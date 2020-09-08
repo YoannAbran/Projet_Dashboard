@@ -1,7 +1,7 @@
 <?php
 require('controller/controller.php');
-if (isset($_GET['action'])) {
 
+if (isset($_GET['action'])){
   if ($_GET['action'] == 'insertnew') {
     create();
     require("view/CreateView.php");
@@ -16,6 +16,21 @@ if (isset($_GET['action'])) {
     else if ($_GET['action'] == 'register') {
       require("view/RegisterView.php");
       register();
+    }
+      else if ($_GET['action']=='edit'){
+          require("view/EditView.php");
+          controledit();
+          controleditimg();
+        }
+        else if ($_GET['action'] == 'delete') {
+          if (isset($_POST['suppr'])) {
+            if (isset($_GET['idel'])) {
+              deleteControl();
+            }
+          }
+        }
+      else if ($_GET['action']=='listbook'){
+        viewList();
         }
         else if ($_GET['action'] == 'delete') {
           if (isset($_POST['suppr'])) {
@@ -33,5 +48,5 @@ if (isset($_GET['action'])) {
         }
 }
 else{
-viewIndex();
+require("view/IndexView.php");
 }
