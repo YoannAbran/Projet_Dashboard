@@ -1,7 +1,3 @@
-<!-- UPDATE `jeux_video`
-SET developpeur = 'arc_system'
-WHERE id='7' -->
-
 <?php
 
 // Table Editor
@@ -78,7 +74,5 @@ $valid_extension = array("png","jpeg","jpg","PNG");
   return $editnew;
 }
 }
-
-
 
 ?>

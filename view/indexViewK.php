@@ -1,27 +1,3 @@
-<?php
-      include "controllers/controllerK.php";
-
-$sql = "SELECT * FROM `livres` WHERE 1";
-
-$cool = new edit;
-$testing = $cool -> selectAll();
-foreach ($testing as $test) {
-  // code...
-}
-
-
-echo $test['id'] . " " . $test['nom'] . " " . $test['reference'] . " " .  $test['date_achat'] . " " . $test['date_garantie'] . " " .  $test['prix'] . " " . $test['conseil'];
-
-echo "<br>" . "<br>";
-if(isset($_GET['action'])){
-  if ($_GET['action']=='edit'){
-    controledit();
-    controleditimg();
-echo "";
-  }
-}
-?>
-
 <DOCTYPE html>
 <html>
   <head>
