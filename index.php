@@ -5,6 +5,7 @@ if (isset($_GET['action'])) {
   if ($_GET['action'] == 'insertnew') {
     create();
     require("view/CreateView.php");
+
       }
     else if ($_GET['action'] == 'login') {
       require("view/LoginView.php");
@@ -16,20 +17,6 @@ if (isset($_GET['action'])) {
     else if ($_GET['action'] == 'register') {
       require("view/RegisterView.php");
       register();
-        }
-        else if ($_GET['action'] == 'delete') {
-          if (isset($_POST['suppr'])) {
-            if (isset($_GET['idel'])) {
-              deleteControl();
-            }
-          }
-        }
-        else if(isset($_GET['action'])){
-          if ($_GET['action']=='edit'){
-
-            edit();
-
-          }
         }
 }
 else{
