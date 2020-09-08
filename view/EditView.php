@@ -1,14 +1,8 @@
-<DOCTYPE html>
-<html>
-  <head>
-    <title></title>
-    <link href="css" rel='stylesheet'>
-  </head>
-  <body>
-
-
-
-
+<?php
+  ob_start();
+  session_start();
+  session_regenerate_id();
+?>
     <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit">
       <ul>
         <li><p>Nom : <input type="text" name="nom" value=""/></p></li>
@@ -47,7 +41,10 @@
       </div>
     </div>
 
-  </body>
 
-<script></script>
-</html>
+
+
+
+<?php
+$content = ob_get_clean();
+ require('template.php');
