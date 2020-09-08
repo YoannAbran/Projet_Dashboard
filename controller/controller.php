@@ -89,6 +89,23 @@ foreach ($noms as $vente) {
   $stock=$vente['nomC'];
   $test->insertvente($nom,$stock);
 }
+function controledit(){
+  if(isset($_POST['edit'])) {
+    $nom =input($_POST['nom']);
+    $reference =input($_POST['reference']);
+    $date_achat = input($_POST['date_achat']);
+    $date_garantie =input($_POST['date_garantie']);
+    $prix =input($_POST['prix']);
+    $conseil =input ($_POST['conseil']);
+    $categorie =input($_POST['categorie']);
+    $edit = new edit;
+    $edit2 = $edit -> editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
+}
+}
+function controleditimg() {
+    $edit = new edit;
+    $pictures = $edit-> editimg();
+}
 }
 function input($data) {
   $data = trim($data);

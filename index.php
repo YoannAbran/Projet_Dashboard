@@ -1,7 +1,7 @@
 <?php
 require('controller/controller.php');
 
-
+if (isset($_GET['action'])){
   if ($_GET['action'] == 'insertnew') {
     create();
     require("view/CreateView.php");
@@ -19,12 +19,11 @@ require('controller/controller.php');
       register();
     }
       else if ($_GET['action']=='edit'){
+          require("view/EditView.php");
           controledit();
           controleditimg();
         }
-
-
-
+}
 else{
-viewIndex();
+require("view/IndexView.php");
 }
