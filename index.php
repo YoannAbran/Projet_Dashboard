@@ -1,6 +1,6 @@
 <?php
 require('controller/controller.php');
-if (isset($_GET['action'])) {
+
 
   if ($_GET['action'] == 'insertnew') {
     create();
@@ -17,8 +17,14 @@ if (isset($_GET['action'])) {
     else if ($_GET['action'] == 'register') {
       require("view/RegisterView.php");
       register();
+    }
+      else if ($_GET['action']=='edit'){
+          controledit();
+          controleditimg();
         }
-}
+
+
+
 else{
 viewIndex();
 }
