@@ -6,7 +6,7 @@
 <div class="">
   <h1>Home</h1>
 </div>
-  
+
       <canvas id="myChart" width="500px" height="100px" ></canvas>
       <script>
       function submitResult() {
