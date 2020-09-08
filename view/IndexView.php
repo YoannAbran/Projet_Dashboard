@@ -17,6 +17,15 @@
   <div class="container">
     <canvas id="myChart3" ></canvas>
   </div>
+  <div class="container">
+    <canvas id="myChart4" ></canvas>
+  </div>
+</div>
+<div class="">
+  Total des ventes : <?php echo prixtotalvente();?> €<br>
+  Total des achat : <?php echo testctotgraph();?> €<br>
+  Nombre d'achat : <?php echo nbretotalachat();?><br>
+  Nombre de vente : <?php echo nbretotalvente();?><br>
 </div>
 
       <script>
@@ -94,6 +103,30 @@
       // Configuration options go here
       options: {}
       });
+      var ctx = document.getElementById('myChart4').getContext('2d');
+      var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+        labels: ['',<?php echo getcatyear();?>'total'],/*'total'*/
+        datasets: [{
+            label: 'achat par categorie sur l\'année 2020',
+            data: [0,<?php echo getpriyear(); echo getpritotyear(); ?>],/*echo testctot();*/
+            backgroundColor: poolColors(['',<?php echo getcatyear(); ?>'total'].length),
+            borderColor:
+                poolColors(['',<?php echo getcatyear(); ?>'total'].length),
+
+
+        }]
+      },
+
+      // Configuration options go here
+      options: {
+
+      }
+      });
       //random color rgba
       function dynamicColors() {
           var r = Math.floor(Math.random() * 255);
@@ -104,7 +137,7 @@
       //color with array.lenght for graph
       function poolColors(a) {
           var pool = [];
-          for(i = 0; i < a; i++) {
+          for(i =0 ; i <= a; i++) {
               pool.push(dynamicColors());
           }
           return pool;

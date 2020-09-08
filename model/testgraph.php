@@ -57,7 +57,7 @@ public function insertvente($nom,$stock){
 //recup et calcul le nombre de vente et le prix total des vente par livre
 public function gettotalvente(){
   $db=$this->dbConnect();
-  $sql = $db->prepare("SELECT ROUND(SUM(prix_vente),2) AS prix_vente,ROUND(SUM(nbre_vente),2) AS nbre_vente FROM vente");
+  $sql = $db->prepare("SELECT ROUND(SUM(prix_vente),2) AS prix_vente,SUM(nbre_vente) AS nbre_vente FROM vente");
   $sql->execute();
   $totalvente=$sql->fetch();
   return $totalvente;
@@ -65,9 +65,27 @@ public function gettotalvente(){
 //recup mois annee table livres
 public function getmonth(){
   $db=$this->dbConnect();
-  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year,ROUND(SUM(prix),2) AS prixcat, categorie FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY mois ");
+  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year,ROUND(SUM(prix),2) AS prixcat, categorie FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY categorie ");
   $sql->execute();
   $month=$sql->fetchAll();
   return $month;
 }
+
+public function prixtotyear(){
+$db=$this->dbConnect();
+$sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31'");
+$sql->execute();
+$prixtotyear=$sql->fetch();
+return $prixtotyear;
+}
+
+public function nmbreachat(){
+$db=$this->dbConnect();
+$sql = $db->prepare("SELECT COUNT(*) AS achat FROM livres
+");
+$sql->execute();
+$nbrachat=$sql->fetch();
+return $nbrachat;
+}
+
 }//fin CLASS

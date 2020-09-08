@@ -4,18 +4,47 @@ function recupmonth(){
   $test = new testgraph;
   $month = $test->getmonth();
   foreach ($month as $mois) {
-    echo " *".$mois['mois']." / ";
+    echo $mois['mois']." / ";
     echo $mois['year']." : ";
     echo $mois['prixcat']." / ";
     echo $mois['categorie']."<br>";
 
   }
 }
+
+function getcatyear(){
+  $test = new testgraph;
+  $month = $test->getmonth();
+  foreach ($month as $mois) {
+    echo "'".$mois['categorie']."',";
+  }
+}
+function getpriyear(){
+  $test = new testgraph;
+  $month = $test->getmonth();
+  foreach ($month as $mois) {
+    echo $mois['prixcat'].",";
+  }
+}
+function getpritotyear(){
+  $test = new testgraph;
+  $yeartot = $test->prixtotyear();
+  echo "'".$yeartot['prixtotal']."'";
+}
+
+
+
+
 //recup le nombre de vente total
 function nbretotalvente(){
   $test=new testgraph;
   $totalvente=$test->gettotalvente();
   echo $totalvente['nbre_vente'];
+}
+function nbretotalachat(){
+  $test=new testgraph;
+  $nbreachat=$test->nmbreachat();
+  echo $nbreachat['achat'];
 }
 
 // recup le prix total des vente
