@@ -9,8 +9,8 @@ class CreateManager extends Database
   $photoname = $_FILES['photo']['name'];
 
   // Location
-  $target_ticket = 'img/'.$ticketname;
-  $target_photo = 'img/'.$photoname;
+  $target_ticket = 'public/img/'.$ticketname;
+  $target_photo = 'public/img/'.$photoname;
   // file extension
   $file_extension_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
   $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);

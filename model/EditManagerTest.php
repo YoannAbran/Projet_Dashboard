@@ -12,7 +12,7 @@ public function update($id,$nom, $reference, $date_achat, $date_garantie, $prix,
 
   if (!empty($_FILES['photo_ticket']['name'])){
     $ticketname = $_FILES['photo_ticket']['name'];
-    $target_ticket = 'img/'.$ticketname;
+    $target_ticket = 'public/img/'.$ticketname;
     $file_extension_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
     $file_extension_ticket = strtolower($file_extension_ticket);
     $valid_extension = array("png","jpeg","jpg","PNG");
@@ -24,7 +24,7 @@ public function update($id,$nom, $reference, $date_achat, $date_garantie, $prix,
   }
   if (!empty($_FILES['photos']['name'])){
   $photoname = $_FILES['photos']['name'];
-  $target_photo = 'img/'.$photoname;
+  $target_photo = 'public/img/'.$photoname;
   $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);
   $file_extension_photo = strtolower($file_extension_photo);
   $valid_extension = array("png","jpeg","jpg","PNG");
