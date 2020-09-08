@@ -65,7 +65,7 @@ public function gettotalvente(){
 //recup mois annee table livres
 public function getmonth(){
   $db=$this->dbConnect();
-  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year FROM livres GROUP BY mois ");
+  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year,ROUND(SUM(prix),2) AS prixcat, categorie FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY mois ");
   $sql->execute();
   $month=$sql->fetchAll();
   return $month;
@@ -77,8 +77,11 @@ function recupmonth(){
   $test = new testgraph;
   $month = $test->getmonth();
   foreach ($month as $mois) {
-    echo $mois['mois'].",";
-    echo $mois['year']."/";
+    echo " *".$mois['mois']." / ";
+    echo $mois['year']." : ";
+    echo $mois['prixcat']." / ";
+    echo $mois['categorie']."<br>";
+
   }
 }
 //recup le nombre de vente total
