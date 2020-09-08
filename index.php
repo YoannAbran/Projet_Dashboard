@@ -1,5 +1,6 @@
 <?php
 require('controller/controller.php');
+require('controller/graphController.php');
 
 if (isset($_GET['action'])){
   if ($_GET['action'] == 'insertnew') {
