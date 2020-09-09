@@ -2,18 +2,7 @@
       include "controller.php";
       controledisplay();
 
-// $sql = "SELECT * FROM `livres` WHERE 1";
-//
-// $cool = new editManagerK;
-// $testing = $cool -> selectAll();
-// foreach ($testing as $test) {
-//   // code...
-// }
-//
-//
-// echo $test['id'] . " " . $test['nom'] . " " . $test['reference'] . " " .  $test['date_achat'] . " " . $test['date_garantie'] . " " .  $test['prix'] . " " . $test['conseil'];
-//
-// echo "<br>" . "<br>";
+
 if(isset($_GET['action'])){
   if ($_GET['action']=='edit'){
     controledit();
