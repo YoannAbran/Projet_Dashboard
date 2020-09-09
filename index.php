@@ -18,11 +18,12 @@ if (isset($_GET['action'])){
       require("view/RegisterView.php");
       register();
     }
-      else if ($_GET['action']=='edit'){
-          require("view/EditView.php");
+
+    else if ($_GET['action']=='edit'){
+          controledisplay();
           controledit();
           controleditimg();
-        }
+      }
         else if ($_GET['action']=='listbook'){
           booksList();
           }

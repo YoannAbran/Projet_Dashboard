@@ -18,7 +18,7 @@ class editManager extends Database{
   }
 
 
-public function editor ($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie){
+public function editor ($id, $nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie){
 
 
   $conn = $this->dbConnect();
@@ -30,7 +30,7 @@ public function editor ($nom, $reference, $date_achat, $date_garantie, $prix, $c
      prix = :prix,
      conseil = :conseil,
      categorie = :categorie
-     WHERE id = 1");
+     WHERE id = $id");
 
     $stmt->bindParam(':nom',$nom);
     $stmt->bindParam(':reference',$reference);
@@ -46,29 +46,39 @@ public function editor ($nom, $reference, $date_achat, $date_garantie, $prix, $c
   return $updatefunc;
 }
 //image management for edition
- public function editimg(){
+ public function editimg($id){
 
   $conn = $this->dbConnect();
-  $edit3 = $conn->prepare("UPDATE livres SET photo_ticket = :photo_ticket, photo = :photo");
-  $ticketname = $_FILES['photo_ticket']['name'];
-  $photoname = $_FILES['photo']['name'];
+  $edit3 = $conn->prepare("UPDATE livres SET photo_ticket = :photo_ticket, photo = :photo WHERE id=$id");
+  $ticket = $_POST['old_ticket'];
+    $photo = $_POST['old_photo'];
 
-  $target_ticket = 'public/img/'.$ticketname;
-  $target_photo = 'public/img/'.$photoname;
-
-
-  $file_extension_photo_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
-  $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);
-  $file_extension_photo_ticket = strtolower($file_extension_photo_ticket);
-  $file_extension_photo = strtolower($file_extension_photo);
-
-
-$valid_extension = array("png","jpeg","jpg","PNG");
-    if(in_array($file_extension_photo_ticket, $valid_extension) && in_array($file_extension_photo, $valid_extension)){
-     // Upload file
-      if(move_uploaded_file($_FILES['photo_ticket']['tmp_name'],$target_ticket) && move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
+    if (!empty($_FILES['photo_ticket']['name'])){
+      $ticketname = $_FILES['photo_ticket']['name'];
+      $target_ticket = 'public/img/'.$ticketname;
+      $file_extension_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
+      $file_extension_ticket = strtolower($file_extension_ticket);
+      $valid_extension = array("png","jpeg","jpg","PNG");
+      if(in_array($file_extension_ticket, $valid_extension)){
+        if(move_uploaded_file($_FILES['photo_ticket']['tmp_name'],$target_ticket)){}
+      }
+    }else{
+      $target_ticket=$ticket;
+    }
+    if (!empty($_FILES['photo']['name'])){
+    $photoname = $_FILES['photo']['name'];
+    $target_photo = 'public/img/'.$photoname;
+    $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);
+    $file_extension_photo = strtolower($file_extension_photo);
+    $valid_extension = array("png","jpeg","jpg","PNG");
+      if(in_array($file_extension_photo, $valid_extension)){
+      if(move_uploaded_file($_FILES['photo']['tmp_name'],$target_photo)){
+      }
+    }
   }
-}
+  else {
+    $target_photo=$photo;
+  }
 
   // $edit3->bindParam(':photo_ticket',$target_ticket, PDO::PARAM_STR);
   // $edit3->bindParam(':photo',$target_photo, PDO::PARAM_STR);
@@ -76,6 +86,13 @@ $valid_extension = array("png","jpeg","jpg","PNG");
   $editnew = $edit3->execute(array(':photo_ticket' => $target_ticket, ':photo' => $target_photo));
 
   return $editnew;
+}
+public function displayimg($id){
+  $conn = $this-> dbConnect();
+  $imagesarray = $conn->prepare("SELECT * FROM `livres` WHERE id=$id");
+  $imagesarray -> execute();
+  $displayer = $imagesarray -> fetchAll();
+  return $displayer;
 }
 }
 ?>

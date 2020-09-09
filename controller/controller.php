@@ -93,6 +93,7 @@ foreach ($noms as $vente) {
 }
 
 function controledit(){
+  if (isset($_GET['id']) && $_GET['id'] > 0) {
   if(isset($_POST['edit'])) {
     $nom =input($_POST['nom']);
     $reference =input($_POST['reference']);
@@ -102,22 +103,26 @@ function controledit(){
     $conseil =input ($_POST['conseil']);
     $categorie =input($_POST['categorie']);
     $edit = new editManager;
-    $edit2 = $edit -> editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
-
+    $edit2 = $edit -> editor($_GET['id'],$nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
+}
 }
 }
 function editdisplay(){
+  if (isset($_GET['id']) && $_GET['id'] > 0) {
   $edit = new editManager;
   $texts = $edit->edittext($_GET['id']);
   require("view/EditView.php");
-
+}
 }
 
 function controleditimg() {
+  if (isset($_GET['id']) && $_GET['id'] > 0) {
+    if(isset($_POST['edit'])){
     $edit = new editManager;
-    $pictures = $edit-> editimg();
+    $pictures = $edit-> editimg($_GET['id']);
 }
-
+}
+}
 //en poo class livres,
 function booksList()
 {
@@ -145,7 +150,12 @@ function bookPage()
 
     require('');
 }
+function controledisplay() {
+   $displayer =  new editManager;
+   $visuals = $displayer-> displayimg($_GET['id']);
+   require('view/EditView.php');
 
+ }
 function input($data) {
   $data = trim($data);
   $data = stripslashes($data);
