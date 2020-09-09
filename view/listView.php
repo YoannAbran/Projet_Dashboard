@@ -24,6 +24,7 @@
               <th scope='col'>Ticket</th>
               <th scope='col'>Photo</th>
               <th scope='col'>Catégorie</th>
+              <th scope='col'>Suppression</th>
             </tr>
           </thead>
         <tbody>"
@@ -46,6 +47,7 @@
           <td><?php echo $book['photo_ticket']; ?></td>
           <td><?php echo $book['photo']; ?></td>
           <td><?php echo $book['categorie']; ?></td>
+          <td class="text-center"><a href="delete.php?id=<?= $book['id'] ?>" ><img src="trash.svg" alt="delete" width="16" height="16" title="delete"></a></td>
       </tr>
 
         <?php }
@@ -53,5 +55,5 @@
             </table>"
         ?>
 
-  </body>
+</body>
 </html>

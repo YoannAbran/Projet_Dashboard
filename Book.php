@@ -85,7 +85,7 @@ class Book extends MODEL {
   }
 
 
-  public function set_name($id, $nom) {
+  public function set_nom($id, $nom) {
     $this->query("UPDATE $this->table SET nom = ? WHERE id = ?", $nom, $id);
   }
 

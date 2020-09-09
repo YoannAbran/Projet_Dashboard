@@ -6,7 +6,7 @@ function booksList()
   $booksManager = new Book(); // Création d'un objet
   $books = $booksManager->get_all();  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
 
-  require('listView.php');
+  require('view/listView.php');
 
 }
 
@@ -15,7 +15,7 @@ function booksListAdmin()
   $booksManager = new Book(); // Création d'un objet
   $books = $booksManager->get_all();  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
 
-    require('adminView.php');
+    require('view/adminView.php');
 }
 
 function bookAdd($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $photo_ticket, $photo, $categorie)
