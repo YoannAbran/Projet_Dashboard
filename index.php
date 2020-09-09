@@ -1,11 +1,11 @@
 <?php
 require('controller/controller.php');
+require('controller/graphController.php');
 
 if (isset($_GET['action'])){
   if ($_GET['action'] == 'insertnew') {
     create();
     require("view/CreateView.php");
-
       }
     else if ($_GET['action'] == 'login') {
       require("view/LoginView.php");

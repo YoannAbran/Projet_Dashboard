@@ -77,6 +77,7 @@ function deconnexion(){
   $deco = $adminManager->deco();
 }
 
+
 function addvente(){
   $test=new testgraph;
   $noms=$test->teststock();

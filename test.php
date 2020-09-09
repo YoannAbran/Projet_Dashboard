@@ -28,6 +28,14 @@ $sql->execute();
 $nbrenom=$sql->fetchAll();
 return $nbrenom;
 }
+public function nmbreachat(){
+$db=$this->dbConnect();
+$sql = $db->prepare("SELECT COUNT(*) AS achat FROM livres
+");
+$sql->execute();
+$nbrachat=$sql->fetchAll();
+return $nbrachat;
+}
 
 //recup tout dans la table vente_direct
 public function getnomvente(){
@@ -70,6 +78,13 @@ public function getmonth(){
   $month=$sql->fetchAll();
   return $month;
 }
+public function prixtotyear(){
+$db=$this->dbConnect();
+$sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31'");
+$sql->execute();
+$prixtotyear=$sql->fetch();
+return $prixtotyear;
+}
 }//fin CLASS
 
 //recup mois
@@ -89,6 +104,11 @@ function nbretotalvente(){
   $test=new testgraph;
   $totalvente=$test->gettotalvente();
   echo $totalvente['nbre_vente'];
+}
+function nbretotalachat(){
+  $test=new testgraph;
+  $nbreachat=$test->nmbreachat();
+  echo $nbreachat['achat'];
 }
 
 // recup le prix total des vente
@@ -172,7 +192,11 @@ function vente(){
     echo  $vente['prix_vente']*$vente['nbre_vente'].",";
   }
 }
-
+function getpritotyear(){
+  $test = new testgraph;
+  $yeartot = $test->prixtotyear();
+  echo "'".$yeartot['prixtotal']."'";
+}
 //fonction pour mettre a jour table vente
 // function addvente(){
 //   $test=new testgraph;
@@ -198,6 +222,7 @@ echo nomvente()."<br>";
 echo nbretotalvente()."<br>";
 echo prixtotalvente()."<br>";
 echo recupmonth()."<br>";
+echo getpritotyear();
 ?>
 
 <!DOCTYPE html>
@@ -309,6 +334,13 @@ function poolColors(a) {
     }
     return pool;
 }
+</script>
+<script type="text/javascript">
+var testcat = <?php echo testcatgraph();?>
+var testprix = <?php echo testprix(); ?>
+var labelvente = <?php echo labelvente();?>
+var nbrevente = <?php echo nbrevente(); ?>
+var vente = <?php echo vente(); ?>
 </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
