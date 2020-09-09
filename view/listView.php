@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
-  <body>
+<?php
+  ob_start();
+  session_start();
+  session_regenerate_id();
+?>
 
-<!-- WHERE id != (SELECT MAX(id) FROM formulaire) -->
-
-<?php $sql = "SELECT * FROM livres ORDER BY id";
-
-  echo "<table class='table table-striped table-dark'>
+<table class='table table-striped table-dark'>
           <thead>
             <tr>
               <th scope='col'>#</th>
@@ -27,13 +20,10 @@
               <th scope='col'>Suppression</th>
             </tr>
           </thead>
-        <tbody>"
-?>
+        <tbody>
+
 
 <?php
-    // $id = 1;
-    // $book_manager= new Book();
-    // $book = $book_manager->get_id($id);
     foreach ($books as $book) {
 ?>
       <tr>
@@ -47,13 +37,14 @@
           <td><?php echo $book['photo_ticket']; ?></td>
           <td><?php echo $book['photo']; ?></td>
           <td><?php echo $book['categorie']; ?></td>
-          <td class="text-center"><a href="delete.php?id=<?= $book['id'] ?>" ><img src="trash.svg" alt="delete" width="16" height="16" title="delete"></a></td>
+          <td><form action ='index.php?action=delete&id=<?= $book['id'] ?>' method='post' onsubmit='return submitResult();'><button type='submit' name='suppr' value=''><img src="public/img/trash.svg" alt="delete" width="16" height="16" title="delete"></button></form></td>
       </tr>
 
-        <?php }
-          "</tbody>
-            </table>"
-        ?>
+        <?php }  ?>
+          </tbody>
+            </table>
 
-</body>
-</html>
+
+<?php
+  $content = ob_get_clean();
+  require('template.php');

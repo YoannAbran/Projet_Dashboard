@@ -23,16 +23,17 @@ if (isset($_GET['action'])){
           controledit();
           controleditimg();
         }
+        else if ($_GET['action']=='listbook'){
+          booksList();
+          }
         else if ($_GET['action'] == 'delete') {
           if (isset($_POST['suppr'])) {
-            if (isset($_GET['idel'])) {
-              deleteControl();
+            if (isset($_GET['id'])) {
+              bookDelete($_GET['id']);
             }
           }
         }
-      else if ($_GET['action']=='listbook'){
-        viewList();
-        }
+
 }
 else{
 require("view/IndexView.php");

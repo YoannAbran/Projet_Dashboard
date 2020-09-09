@@ -109,20 +109,33 @@ function controleditimg() {
     $pictures = $edit-> editimg();
 }
 
-function viewList(){
-  $indexManager = new ListManager;
-  $rows = $indexManager->selectAll();
-  require("view/ListView.php");
+//en poo class livres,
+function booksList()
+{
+  $booksManager = new Book(); // Création d'un objet
+  $books = $booksManager->get_all();  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
+
+  require('view/listView.php');
+
 }
 
-function deleteControl(){
-    if (isset($_GET['idel'])) {
-      $indexManager = new ListManager;
-      $del = $indexManager->delete($_GET['idel']);
-    }
-    header('Location: index.php?action=listbook');
-    exit;
-  }
+function bookDelete($id)
+{
+  $booksManager = new Book();
+  $book = $booksManager->remove($_GET['id']);
+  booksList();
+}
+
+
+function bookPage()
+{
+  // $animalsManager = new animalsManager(); // Création d'un objet
+  // $animal = $animalsManager->getAnimals($_GET['id']); //  Appel la fonction qui renvoie toutes les données concernant l'animal ou $id = $_GET['id']
+  $booksManager = new Book();
+  $book = $booksManager->get_id($id);
+
+    require('');
+}
 
 function input($data) {
   $data = trim($data);
