@@ -30,7 +30,7 @@ function getpritotyear(){
   $test = new testgraph;
   $yeartot = $test->prixtotyear();
   echo "'".$yeartot['prixtotal']."'";
-}s
+}
 
 
 
@@ -128,3 +128,4 @@ function vente(){
     echo  $vente['prix_vente']*$vente['nbre_vente'].",";
   }
 }
+?>
