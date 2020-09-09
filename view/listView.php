@@ -28,7 +28,7 @@
 ?>
       <tr>
         <th scope="row"><?php echo $book['id']; ?></th>
-          <td><?php echo $book['nom']; ?></td>
+          <td><a href="index.php?action=edit&id=<?= $book['id'] ?>"><?php echo $book['nom']; ?></a></td>
           <td><?php echo $book['reference']; ?></td>
           <td><?php echo $book['date_achat']; ?></td>
           <td><?php echo $book['date_garantie']; ?></td>

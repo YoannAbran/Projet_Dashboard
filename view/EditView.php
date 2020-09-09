@@ -2,8 +2,9 @@
   ob_start();
   session_start();
   session_regenerate_id();
+  $id=$_GET['id'];
 ?>
-    <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit">
+    <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit&id=<?= $id ?>">
       <ul>
         <li><p>Nom : <input type="text" name="nom" value=""/></p></li>
 
