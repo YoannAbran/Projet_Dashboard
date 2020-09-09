@@ -41,9 +41,9 @@ foreach ($visuals as $visual) {}
 <!-- displaying images from the table -->
     <div>
       <div id=images>
-        <img src=" <?php echo $visual ['photo_ticket'] ?> ">;
+        <img src=" <?php echo $visual ['photo_ticket'] ?> ">
       </div>
-        <img src=" <?php echo $visual ['photo']?> ">"
+        <img src=" <?php echo $visual ['photo']?> ">
     </div>
 
   </body>
