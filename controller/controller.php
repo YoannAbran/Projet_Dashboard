@@ -128,9 +128,17 @@ function booksList()
 {
   $booksManager = new Book(); // Création d'un objet
   $books = $booksManager->get_all();  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
-
   require('view/listView.php');
-
+}
+function page(){
+  if(isset($_GET['page']) && !empty($_GET['page'])){
+      $currentPage = (int) strip_tags($_GET['page']);
+  }else{
+      $currentPage = 1;
+  }
+  $page = new ListManager();
+  $resultats= $page->pagination();
+    require('view/listView.php');
 }
 
 function bookDelete($id)

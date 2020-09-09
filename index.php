@@ -25,7 +25,10 @@ if (isset($_GET['action'])){
           controleditimg();
       }
         else if ($_GET['action']=='listbook'){
-          booksList();
+        
+          page();
+          // booksList();
+
           }
         else if ($_GET['action'] == 'delete') {
           if (isset($_POST['suppr'])) {

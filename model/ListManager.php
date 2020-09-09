@@ -1,23 +1,25 @@
 <?php
 class ListManager extends Database
 {
-
-  public function selectAll(){
+  public function pagination(){
+    if(isset($_GET['page']) && !empty($_GET['page'])){
+        $currentPage = (int) strip_tags($_GET['page']);
+    }else{
+        $currentPage = 1;
+    }
     $conn = $this->dbConnect();
-    $sql = $conn->prepare("SELECT *
-                            FROM livres
-                            ");
-    $sql->execute();
-    $rows = $sql->fetchAll();
-    return $rows;
-  }
-  public function delete($id){
-    $conn = $this->dbConnect();
-    $sql = $conn-> prepare("DELETE FROM livres
-      WHERE id = :id");
-    $del = $sql->execute(array(':id'=>$id));
-    $del = $conn -> prepare("DELETE FROM lieux_achat WHERE id_livre = :id");
-      $del = $sql->execute(array(':id'=>$id));
-    return $del;
+    $sql = 'SELECT * FROM livres';
+    $query=$conn->prepare($sql);
+    $query->execute();
+    $pagin = $query->rowCount();
+    $parPage = 15;
+    $pages = ceil($pagin/ $parPage);
+    $premier = ($currentPage * $parPage) - $parPage;
+    $search='SELECT * FROM livres LIMIT :premier, :parpage; ';
+    $resultats=$conn->prepare($search);
+    $resultats->bindValue(':premier', $premier, PDO::PARAM_INT);
+    $resultats->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+    $resultats->execute();
+    return $resultats;
   }
 }
