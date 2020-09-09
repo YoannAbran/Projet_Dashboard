@@ -2,7 +2,7 @@
 
 function chargerClasse($classe)
 {
-require $classe . '.php'; // On inclut la classe correspondante au paramètre passé.
+require "models/" . $classe . '.php'; // On inclut la classe correspondante au paramètre passé.
 }
 spl_autoload_register('chargerClasse'); // On enregistre la fonction en autoload pour qu'elle soit appelée dès qu'on instanciera une classe non déclarée.
 
@@ -15,12 +15,12 @@ spl_autoload_register('chargerClasse'); // On enregistre la fonction en autoload
       $prix =input($_POST['prix']);
       $conseil =input ($_POST['conseil']);
       $categorie =input($_POST['categorie']);
-      $edit = new edit;
+      $edit = new editManagerK;
       $edit2 = $edit -> editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
   }
 }
   function controleditimg() {
-      $edit = new edit;
+      $edit = new editManagerK;
       $pictures = $edit-> editimg();
   }
 
@@ -31,4 +31,9 @@ spl_autoload_register('chargerClasse'); // On enregistre la fonction en autoload
      $data = htmlspecialchars($data);
      return $data;
 }
+  function controledisplay() {
+    $displayer =  new editManagerK;
+    $visuals = $displayer-> displayimg();
+    echo $visuals["photo_ticket"];
+  }
 ?>

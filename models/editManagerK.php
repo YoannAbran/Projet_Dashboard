@@ -3,7 +3,7 @@
 // Table Editor
 require 'Database.php';
 
-class edit extends Database{
+class editManagerK extends Database{
   public function selectAll(){
   $conn = $this->dbConnect();
   $sql = $conn->prepare("SELECT *
@@ -72,6 +72,13 @@ $valid_extension = array("png","jpeg","jpg","PNG");
   $editnew = $edit3->execute(array(':photo_ticket' => $target_ticket, ':photo' => $target_photo));
 
   return $editnew;
+}
+public function displayimg(){
+  $conn = $this-> dbConnect();
+  $imagesarray = $conn->prepare("SELECT * FROM `livres` WHERE id=1");
+  $imagesarray -> execute();
+  $displayer = $imagesarray -> fetch();
+  return $displayer;
 }
 }
 

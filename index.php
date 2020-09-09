@@ -1,18 +1,19 @@
 <?php
-      include "controllers/controllerK.php";
+      include "controller.php";
+      controledisplay();
 
-$sql = "SELECT * FROM `livres` WHERE 1";
-
-$cool = new edit;
-$testing = $cool -> selectAll();
-foreach ($testing as $test) {
-  // code...
-}
-
-
-echo $test['id'] . " " . $test['nom'] . " " . $test['reference'] . " " .  $test['date_achat'] . " " . $test['date_garantie'] . " " .  $test['prix'] . " " . $test['conseil'];
-
-echo "<br>" . "<br>";
+// $sql = "SELECT * FROM `livres` WHERE 1";
+//
+// $cool = new editManagerK;
+// $testing = $cool -> selectAll();
+// foreach ($testing as $test) {
+//   // code...
+// }
+//
+//
+// echo $test['id'] . " " . $test['nom'] . " " . $test['reference'] . " " .  $test['date_achat'] . " " . $test['date_garantie'] . " " .  $test['prix'] . " " . $test['conseil'];
+//
+// echo "<br>" . "<br>";
 if(isset($_GET['action'])){
   if ($_GET['action']=='edit'){
     controledit();
@@ -61,14 +62,12 @@ echo "";
 
 <!-- displaying images from the table -->
     <div>
-      <div id=phototicket>
-        <!-- <img src="source.php?id=1"/> -->
-        <?php echo "<img src='public/img" . $row['photo_ticket'] . "'>"?>
+      <div id=images>
+
+        <img src=" <?php controledisplay() ?> ">;
+
       </div>
-      <div id=photo>
-        <!-- <img src="source.php?id=1"/> -->
-        <?php echo "<img src='" . $row['photo'] . "'>"?>
-      </div>
+      <?php ?>
     </div>
 
   </body>
