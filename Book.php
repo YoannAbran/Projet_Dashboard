@@ -35,13 +35,6 @@ class Book extends MODEL {
     $this->query("DELETE FROM $this->table WHERE id = ?", $id);
   }
 
-  public function  archive($id) {
-    $this->query("UPDATE $this->table SET archived = ? WHERE id = ?", "true", $id);
-  }
-
-  public function  unarchive($id) {
-    $this->query("UPDATE $this->table SET archived = ? WHERE id = ?", "false", $id);
-  }
 
   public function get_id($id) {
     return $this->query("SELECT * FROM $this->table WHERE id = ?", $id)->fetch_assoc();
@@ -84,42 +77,6 @@ class Book extends MODEL {
     return $this->query("SELECT * FROM $this->table WHERE archived = ?", "n");
   }
 
-
-  public function set_nom($id, $nom) {
-    $this->query("UPDATE $this->table SET nom = ? WHERE id = ?", $nom, $id);
-  }
-
-  public function set_reference($id, $reference) {
-    $this->query("UPDATE $this->table SET reference = ? WHERE id = ?", $reference, $id);
-  }
-
-  public function set_buydate($id, $date_achat) {
-    $this->query("UPDATE $this->table SET date_achat = ? WHERE id = ?", $date_achat, $id);
-  }
-
-  public function set_warrantydate($id, $date_garantie) {
-    $this->query("UPDATE $this->table SET date_garantie = ? WHERE id = ?", $date_garantie, $id);
-  }
-
-  public function set_prix($id, $prix) {
-    $this->query("UPDATE $this->table SET prix = ? WHERE id = ?", $prix, $id);
-  }
-
-  public function set_conseil($id, $conseil) {
-    $this->query("UPDATE $this->table SET conseil = ? WHERE id = ?", $conseil, $id);
-  }
-
-  public function set_tphoto($id, $photo_ticket) {
-    $this->query("UPDATE $this->table SET photo_ticket = ? WHERE id = ?", $photo_ticket, $id);
-  }
-
-  public function set_photo($id, $photo) {
-    $this->queryBlob("UPDATE $this->table SET photo = ? WHERE id = ?", $photo, $id);
-  }
-
-  public function set_categorie($id, $categorie) {
-    $this->query("UPDATE $this->table SET categorie = ? WHERE id = ?", $categorie, $id);
-  }
 
   public function get_all() {
     return $this->query("SELECT * FROM $this->table");
