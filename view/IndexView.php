@@ -7,26 +7,42 @@
   <h1>Home</h1>
 </div>
 
-<div class="container-fluid d-flex">
-  <div class="container">
+<div class="container-fluid d-flex flex-column">
+  <div class="container d-flex">
+  <div class="container border border-dark p-2">
     <canvas id="myChart" ></canvas>
   </div>
-  <div class="container">
+  <div class="container border border-dark p-2" >
     <canvas id="myChart2" ></canvas>
   </div>
-  <div class="container">
+  </div>
+  <div class="container d-flex">
+  <div class="container border border-dark p-2">
     <canvas id="myChart3" ></canvas>
   </div>
-  <div class="container">
+  <div class="container border border-dark p-2">
     <canvas id="myChart4" ></canvas>
   </div>
+  </div>
 </div>
+
 <div class="">
-  Total des ventes : <?php echo prixtotalvente();?> €<br>
-  Total des achat : <?php echo testctotgraph();?> €<br>
-  Nombre d'achat : <?php echo nbretotalachat();?><br>
-  Nombre de vente : <?php echo nbretotalvente();?><br>
-</div>
+  <p>Total des ventes : <span class="font-weight-bolder"><?php echo prixtotalvente();?></span> €<br></p>
+  </div>
+<div class="">
+    <p>Total des achat : <span class="font-weight-bolder"><?php echo testctotgraph();?></span> €<br></p>
+  </div>
+<div class="">
+  <p>Nombre d'achat : <span class="font-weight-bolder"><?php echo nbretotalachat();?></span><br></p>
+  </div>
+<div class="">
+  <p>Nombre de vente : <span class="font-weight-bolder"><?php echo nbretotalvente();?></span><br></p>
+  </div>
+
+
+
+
+
 
       <script>
       function submitResult() {

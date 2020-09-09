@@ -62,6 +62,7 @@ public function gettotalvente(){
   $totalvente=$sql->fetch();
   return $totalvente;
 }
+
 //recup mois annee table livres
 public function getmonth(){
   $db=$this->dbConnect();
