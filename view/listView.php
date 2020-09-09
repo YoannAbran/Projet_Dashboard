@@ -17,7 +17,9 @@
               <th scope='col'>Ticket</th>
               <th scope='col'>Photo</th>
               <th scope='col'>Catégorie</th>
-              <th scope='col'>Suppression</th>
+              <?php if (isset($_SESSION['isAdmin'])){
+              echo "<th scope='col'>Suppression</th>
+                ";}?>
             </tr>
           </thead>
         <tbody>
@@ -28,7 +30,9 @@
 ?>
       <tr>
         <th scope="row"><?php echo $book['id']; ?></th>
-          <td><a href="index.php?action=edit&id=<?= $book['id'] ?>"><?php echo $book['nom']; ?></a></td>
+        <?php if (isset($_SESSION['isAdmin'])){
+        echo "<td><a href='index.php?action=edit&id=".$book['id']."'>".$book['nom']."</a></td>";}
+        else {  echo "<td>".$book['nom']."</td>";}?>
           <td><?php echo $book['reference']; ?></td>
           <td><?php echo $book['date_achat']; ?></td>
           <td><?php echo $book['date_garantie']; ?></td>
@@ -37,7 +41,8 @@
           <td><?php echo $book['photo_ticket']; ?></td>
           <td><?php echo $book['photo']; ?></td>
           <td><?php echo $book['categorie']; ?></td>
-          <td><form action ='index.php?action=delete&id=<?= $book['id'] ?>' method='post' onsubmit='return submitResult();'><button type='submit' name='suppr' value=''><img src="public/img/trash.svg" alt="delete" width="16" height="16" title="delete"></button></form></td>
+        <?php    if (isset($_SESSION['isAdmin'])){
+            echo "<td><form action ='index.php?action=delete&id=".$book['id']."' method='post' onsubmit='return submitResult();'><button type='submit' name='suppr' value=''><img src='public/img/trash.svg' alt='delete' width='16' height='16' title='delete'></button></form></td>";}?>
       </tr>
 
         <?php }  ?>
