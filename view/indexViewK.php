@@ -8,10 +8,13 @@
 
 
 
+<?php
 
+foreach ($visuals as $visual) {}
+?>
     <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit">
       <ul>
-        <li><p>Nom : <input type="text" name="nom" value=""/></p></li>
+        <li><p>Nom : <input type="text" name="nom" value="<?php echo $visual['nom']?>"/></p></li>
 
         <li><p>Date d'achat : <input type="date" name="date_achat" value=""/></p></li>
 
@@ -37,14 +40,12 @@
 
 <!-- displaying images from the table -->
     <div>
-      <div id=phototicket>
-        <!-- <img src="source.php?id=1"/> -->
-        <?php echo "<img src='public/img" . $row['photo_ticket'] . "'>"?>
+      <div id=images>
+
+        <img src=" <?php ?> ">;
+
       </div>
-      <div id=photo>
-        <!-- <img src="source.php?id=1"/> -->
-        <?php echo "<img src='" . $row['photo'] . "'>"?>
-      </div>
+      <?php ?>
     </div>
 
   </body>

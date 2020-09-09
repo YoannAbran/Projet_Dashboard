@@ -34,6 +34,7 @@ spl_autoload_register('chargerClasse'); // On enregistre la fonction en autoload
   function controledisplay() {
     $displayer =  new editManagerK;
     $visuals = $displayer-> displayimg();
-    echo $visuals["photo_ticket"];
+    require('view/indexViewK.php');
+
   }
 ?>

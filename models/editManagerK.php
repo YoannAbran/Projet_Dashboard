@@ -1,7 +1,7 @@
 <?php
 
 // Table Editor
-require 'Database.php';
+require_once './models/Database.php';
 
 class editManagerK extends Database{
   public function selectAll(){
@@ -77,7 +77,7 @@ public function displayimg(){
   $conn = $this-> dbConnect();
   $imagesarray = $conn->prepare("SELECT * FROM `livres` WHERE id=1");
   $imagesarray -> execute();
-  $displayer = $imagesarray -> fetch();
+  $displayer = $imagesarray -> fetchAll();
   return $displayer;
 }
 }
