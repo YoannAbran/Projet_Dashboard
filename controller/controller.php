@@ -91,6 +91,7 @@ foreach ($noms as $vente) {
   $test->insertvente($nom,$stock);
 }
 }
+
 function controledit(){
   if(isset($_POST['edit'])) {
     $nom =input($_POST['nom']);
@@ -100,9 +101,16 @@ function controledit(){
     $prix =input($_POST['prix']);
     $conseil =input ($_POST['conseil']);
     $categorie =input($_POST['categorie']);
-    $edit = new edit;
+    $edit = new editManager;
     $edit2 = $edit -> editor($nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
+
 }
+}
+function editdisplay(){
+  $edit = new editManager;
+  $texts = $edit->edittext($_GET['id']);
+  require("view/EditView.php");
+
 }
 
 function controleditimg() {

@@ -3,6 +3,7 @@
   session_start();
   session_regenerate_id();
   $id=$_GET['id'];
+  
 ?>
     <form name="edition" enctype ="multipart/form-data" method="post" action="index.php?action=edit&id=<?= $id ?>">
       <ul>
