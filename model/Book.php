@@ -20,8 +20,6 @@ class Book extends MODEL {
       photo_ticket CHAR(255) NOT NULL,
       photo CHAR(255) NOT NULL,
       categorie CHAR(80) NOT NULL,
-
-      archived CHAR(5) DEFAULT 'false'
     )";
     $this->createDataBase();
     $this->createTable();
