@@ -30,7 +30,7 @@ $title = "dashboard";
           <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class='nav-item'>
-           <a class='nav-link' href='index.php?action=listbook'>Liste des livres</a>
+           <a class='nav-link' href='<?php echo htmlspecialchars('index.php?action=listbook')?>'>Liste des livres</a>
          </li>
         <?php
 
@@ -39,19 +39,19 @@ $title = "dashboard";
 
 
           <li class='nav-item'>
-          <a class='nav-link' href='index.php?action=insertnew'>Ajouter un produit</a>
+          <a class='nav-link' href='" .htmlspecialchars('index.php?action=insertnew')."'>Ajouter un produit</a>
         </li>
 
        <li class='nav-item'>
-          <a class='nav-link' href='index.php?action=register'>Ajouter un admin</a>
+          <a class='nav-link' href='" .htmlspecialchars('index.php?action=register')."'>Ajouter un admin</a>
         </li>";
       }
          ?>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?action=login">Login</a>
+          <a class="nav-link" href="<?php echo htmlspecialchars('index.php?action=login')?>">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?action=deco">Logout</a>
+          <a class="nav-link" href="<?php echo htmlspecialchars('index.php?action=deco')?>">Logout</a>
         </li>
       </ul>
     </div>

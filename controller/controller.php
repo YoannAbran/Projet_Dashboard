@@ -82,13 +82,14 @@ function addvente(){
   $test=new testgraph;
   $noms=$test->teststock();
   $nomvente=$test->getnomvente();
+
   foreach ($nomvente as $nomv) {
     $nomve=$nomv['nom'];
   }
-foreach ($noms as $vente) {
-  $nom=$vente['nom'];
-  $stock=$vente['nomC'];
-  $test->insertvente($nom,$stock);
+  foreach ($noms as $vente) {
+    $nom=$vente['nom'];
+    $stock=$vente['nomC'];
+    $test->insertvente($nom,$stock);
 }
 }
 
@@ -107,6 +108,7 @@ function controledit(){
 }
 }
 }
+
 function editdisplay(){
   if (isset($_GET['id']) && $_GET['id'] > 0) {
   $edit = new editManager;
@@ -123,50 +125,50 @@ function controleditimg() {
 }
 }
 }
+
 //en poo class livres,
 function booksList($offset, $total_records_per_page,$order,$ascdesc)
 {
-
   $booksManager = new Book(); // Création d'un objet
   $books = $booksManager->get_all($offset, $total_records_per_page,$order,$ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
   // require('view/listView.php');
   return $books;
 }
+
 function page(){
   $page = new book();
   $resultats= $page->pagination();
-
-
-  if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-  $page_no = $_GET['page_no'];
-  } else {
-      $page_no = 1;
+  //pagination
+    if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+    $page_no = $_GET['page_no'];
+    }
+    else {
+        $page_no = 1;
       }
-  $total_records_per_page = 10;
-  $offset = ($page_no-1) * $total_records_per_page;
-  $previous_page = $page_no - 1;
-  $next_page = $page_no + 1;
-  $adjacents = "2";
-  $total_no_of_pages = ceil($resultats / $total_records_per_page);
-  $second_last = $total_no_of_pages - 1;
-  $orderBy = array('nom', 'reference', 'date_achat', 'date_garantie','prix','categorie');
+    $total_records_per_page = 10;
+    $offset = ($page_no-1) * $total_records_per_page;
+    $previous_page = $page_no - 1;
+    $next_page = $page_no + 1;
+    $adjacents = "2";
+    $total_no_of_pages = ceil($resultats / $total_records_per_page);
+    $second_last = $total_no_of_pages - 1;
+    $orderBy = array('nom', 'reference', 'date_achat', 'date_garantie','prix','categorie');
+    //tri par nom,ref....,
+    $order = 'nom';
+      if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+        $order = $_GET['orderBy'];
+      }
+      //tri asc desc
+      $sortBy = array('DESC','ASC' );
+      if (isset($_GET['sort'])&&in_array($_GET['sort'], $sortBy)) {
+        $ascdesc=($_GET['sort']=='ASC')? 'ASC' : 'DESC';
+      }
+      else {
+        $ascdesc='ASC';
+      }
+        $books = booksList($offset, $total_records_per_page,$order,$ascdesc);
 
-$order = 'nom';
-if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-    $order = $_GET['orderBy'];
-
-}
-$sortBy = array('DESC','ASC' );
-
-
-if (isset($_GET['sort'])&&in_array($_GET['sort'], $sortBy)) {
-    $ascdesc=($_GET['sort']=='ASC')? 'ASC' : 'DESC';
-}
-else{$ascdesc='ASC';}
-  $books = booksList($offset, $total_records_per_page,$order,$ascdesc);
 require('view/listView.php');
-
-
 }
 
 function bookDelete($id)
@@ -176,22 +178,19 @@ function bookDelete($id)
   booksList();
 }
 
-
 function bookPage()
 {
-  // $animalsManager = new animalsManager(); // Création d'un objet
-  // $animal = $animalsManager->getAnimals($_GET['id']); //  Appel la fonction qui renvoie toutes les données concernant l'animal ou $id = $_GET['id']
   $booksManager = new Book();
   $book = $booksManager->get_id($id);
-
-    require('');
+  require('');
 }
+
 function controledisplay() {
    $displayer =  new editManager;
    $visuals = $displayer-> displayimg($_GET['id']);
    require('view/EditView.php');
-
  }
+
 function input($data) {
   $data = trim($data);
   $data = stripslashes($data);
