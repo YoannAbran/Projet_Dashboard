@@ -1,8 +1,9 @@
 <?php
 require('controller/controller.php');
 require('controller/graphController.php');
+$action = array('insertnew','login','deco','register','edit','listbook','delete');
+if (isset($_GET['action']) && in_array($_GET['action'], $action)){
 
-if (isset($_GET['action'])){
   if ($_GET['action'] == 'insertnew') {
     create();
     require("view/CreateView.php");
@@ -25,7 +26,7 @@ if (isset($_GET['action'])){
           controleditimg();
       }
         else if ($_GET['action']=='listbook'){
-        
+
           page();
           // booksList();
 
