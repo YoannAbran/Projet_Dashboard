@@ -78,8 +78,18 @@ class Book extends MODEL {
   }
 
 
-  public function get_all() {
-    return $this->query("SELECT * FROM $this->table");
+  public function get_all($offset, $total_records_per_page,$order,$ascdesc) {
+
+    $result = $this->query("SELECT * FROM $this->table ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");
+    return $result;
+  }
+
+  public function pagination(){
+
+        $result_count = $this->query("SELECT COUNT(*) As total_records FROM $this->table");
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        return $total_records;
   }
 
   public function delete_all() {

@@ -124,21 +124,49 @@ function controleditimg() {
 }
 }
 //en poo class livres,
-function booksList()
+function booksList($offset, $total_records_per_page,$order,$ascdesc)
 {
+
   $booksManager = new Book(); // Création d'un objet
-  $books = $booksManager->get_all();  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
-  require('view/listView.php');
+  $books = $booksManager->get_all($offset, $total_records_per_page,$order,$ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
+  // require('view/listView.php');
+  return $books;
 }
 function page(){
-  if(isset($_GET['page']) && !empty($_GET['page'])){
-      $currentPage = (int) strip_tags($_GET['page']);
-  }else{
-      $currentPage = 1;
-  }
-  $page = new ListManager();
+  $page = new book();
   $resultats= $page->pagination();
-    require('view/listView.php');
+
+
+  if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+  $page_no = $_GET['page_no'];
+  } else {
+      $page_no = 1;
+      }
+  $total_records_per_page = 10;
+  $offset = ($page_no-1) * $total_records_per_page;
+  $previous_page = $page_no - 1;
+  $next_page = $page_no + 1;
+  $adjacents = "2";
+  $total_no_of_pages = ceil($resultats / $total_records_per_page);
+  $second_last = $total_no_of_pages - 1;
+  $orderBy = array('nom', 'reference', 'date_achat', 'date_garantie','prix','categorie');
+
+$order = 'nom';
+if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+    $order = $_GET['orderBy'];
+
+}
+$sortBy = array('DESC','ASC' );
+
+
+if (isset($_GET['sort'])&&in_array($_GET['sort'], $sortBy)) {
+    $ascdesc=($_GET['sort']=='ASC')? 'ASC' : 'DESC';
+}
+else{$ascdesc='ASC';}
+  $books = booksList($offset, $total_records_per_page,$order,$ascdesc);
+require('view/listView.php');
+
+
 }
 
 function bookDelete($id)
