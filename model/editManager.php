@@ -42,7 +42,8 @@ public function editor ($id, $nom, $reference, $date_achat, $date_garantie, $pri
 
     $updatefunc=$stmt->execute();
 
-  echo"<font color = 'green'><br>Book's info UPDATED</font>";
+  // echo"<font color = 'green'><br>Book's info UPDATED</font>";
+  echo "<p class='alert alert-success text-center p-2 m-0'>Book updated</p>";
   return $updatefunc;
 }
 //image management for edition

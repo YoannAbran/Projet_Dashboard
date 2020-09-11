@@ -20,9 +20,9 @@ if (isset($_GET['action'])){
     }
 
     else if ($_GET['action']=='edit'){
-          controledisplay();
           controledit();
           controleditimg();
+          controledisplay();
       }
         else if ($_GET['action']=='listbook'){
           booksList();
