@@ -1,15 +1,14 @@
 <?php
-  ob_start();
-  session_start();
-  session_regenerate_id();
-  if (isset($_GET['search'])) {
-      $search = htmlspecialchars($_GET['search'])
-  ;
-  } else {
-      $search='';
-  }
+ob_start();
+session_start();
+session_regenerate_id();
+if (isset($_GET['search'])) {
+    $search = htmlspecialchars($_GET['search'])
+;
+} else {
+    $search='';
+}
 ?>
-
 <nav class="navbar navbar-light bg-light">
   <form class="form-inline" method="GET" action="index.php">
     <input type="hidden" name="action" value="listbook"/>
@@ -82,41 +81,39 @@ while ($row = mysqli_fetch_array($books)) {
         echo "<td class='text-center align-middle'><form action ='index.php?action=delete&id=".$row['id']."' method='post' onsubmit='return submitResult();'><button class='btn btn-link'type='submit' name='suppr' value=''><i class='text-dark fas fa-trash-alt'></i></button></form></td>";
     } ?>
       </tr>
-
-
-    <?php
+      <?php
 }  ?>
-          </tbody>
-        </table>
-        <nav aria-label="Page navigation" class="">
-          <ul class="pagination justify-content-center ">
-  <?php if ($page_no > 1) {
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation" class="">
+            <ul class="pagination justify-content-center ">
+    <?php if ($page_no > 1) {
         echo "<li class='page-item'><a class='  text-dark page-link' href='index.php?action=listbook&search=$search&page_no=1&orderBy=$order&sort=$ascdesc'>First Page</a></li>";
     } ?>
 
-  <li class='page-item <?php if ($page_no <= 1) {
+    <li class='page-item <?php if ($page_no <= 1) {
         echo "disabled";
     } ?> ' >
-  <a class=' text-dark page-link'<?php if ($page_no > 1) {
+    <a class=' text-dark page-link'<?php if ($page_no > 1) {
         echo "href='index.php?action=listbook&search=$search&page_no=$previous_page&orderBy=$order&sort=$ascdesc'";
     } ?>>Previous</a>
-  </li>
+    </li>
 
-  <li class='page-item <?php if ($page_no >= $total_no_of_pages) {
+    <li class='page-item <?php if ($page_no >= $total_no_of_pages) {
         echo "disabled";
     } ?>'>
-  <a class=' text-dark page-link'<?php if ($page_no < $total_no_of_pages) {
+    <a class=' text-dark page-link'<?php if ($page_no < $total_no_of_pages) {
         echo "href='index.php?action=listbook&search=$search&page_no=$next_page&orderBy=$order&sort=$ascdesc'";
     } ?>>Next</a>
-  </li>
+    </li>
 
-  <?php if ($page_no < $total_no_of_pages) {
+    <?php if ($page_no < $total_no_of_pages) {
         echo "<li><a class=' text-dark page-link' href='index.php?action=listbook&search=$search&page_no=$total_no_of_pages&orderBy=$order&sort=$ascdesc'>Last &rsaquo;&rsaquo;</a></li>";
     }
-    echo $total_no_of_pages; ?>
-  </ul>
-</nav>
-</div>
+      echo $total_no_of_pages; ?>
+    </ul>
+  </nav>
+  </div>
 <?php
 $content = ob_get_clean();
  require('template.php');
