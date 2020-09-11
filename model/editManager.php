@@ -51,11 +51,11 @@ class editManager extends Database
     {
         $conn = $this->dbConnect();
         $edit3 = $conn->prepare("UPDATE livres SET photo_ticket = :photo_ticket, photo = :photo WHERE id=$id");
-        $ticket = $_POST['old_ticket'];
-        $photo = $_POST['old_photo'];
+        $ticket = input($_POST['old_ticket']);
+        $photo = input($_POST['old_photo']);
 
         if (!empty($_FILES['photo_ticket']['name'])) {
-            $ticketname = $_FILES['photo_ticket']['name'];
+            $ticketname = input($_FILES['photo_ticket']['name']);
             $target_ticket = 'public/img/'.$ticketname;
             $file_extension_ticket = pathinfo($target_ticket, PATHINFO_EXTENSION);
             $file_extension_ticket = strtolower($file_extension_ticket);
@@ -68,7 +68,7 @@ class editManager extends Database
             $target_ticket=$ticket;
         }
         if (!empty($_FILES['photo']['name'])) {
-            $photoname = $_FILES['photo']['name'];
+            $photoname = input($_FILES['photo']['name']);
             $target_photo = 'public/img/'.$photoname;
             $file_extension_photo = pathinfo($target_photo, PATHINFO_EXTENSION);
             $file_extension_photo = strtolower($file_extension_photo);

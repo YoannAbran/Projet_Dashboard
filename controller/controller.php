@@ -97,6 +97,7 @@ function addvente()
 function controledit()
 {
     if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int)$_GET['id'];
         if (isset($_POST['edit'])) {
             $nom =input($_POST['nom']);
             $reference =input($_POST['reference']);
@@ -106,7 +107,7 @@ function controledit()
             $conseil =input($_POST['conseil']);
             $categorie =input($_POST['categorie']);
             $edit = new editManager;
-            $edit2 = $edit -> editor($_GET['id'], $nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
+            $edit2 = $edit -> editor($id, $nom, $reference, $date_achat, $date_garantie, $prix, $conseil, $categorie);
         }
     }
 }
@@ -114,8 +115,9 @@ function controledit()
 function editdisplay()
 {
     if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int)$_GET['id'];
         $edit = new editManager;
-        $texts = $edit->edittext($_GET['id']);
+        $texts = $edit->edittext($id);
         require("view/EditView.php");
     }
 }
@@ -123,9 +125,10 @@ function editdisplay()
 function controleditimg()
 {
     if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $id = (int)$_GET['id'];
         if (isset($_POST['edit'])) {
             $edit = new editManager;
-            $pictures = $edit-> editimg($_GET['id']);
+            $pictures = $edit-> editimg($id);
         }
     }
 }
@@ -135,7 +138,7 @@ function booksList($offset, $total_records_per_page, $order, $ascdesc)
 {
     $booksManager = new Book();
     if (isset($_GET['search'])) {
-        $search = htmlspecialchars(addcslashes($_GET['search'], '_'));
+        $search = input(addcslashes($_GET['search'], '_'));
         $search="%".$search."%";
         $books = $booksManager->get_search($offset, $total_records_per_page, $order, $ascdesc, $search);
     } // Création d'un objet
@@ -149,10 +152,19 @@ function booksList($offset, $total_records_per_page, $order, $ascdesc)
 function page()
 {
     $page = new book();
-    $resultats= $page->pagination();
+
+    if (isset($_GET['search'])) {
+        $search = input(addcslashes($_GET['search'], '_'));
+        $search="%".$search."%";
+        $resultats= $page->paginationsearch($search);
+    } else {
+        $resultats= $page->pagination();
+    }
+
+
     //pagination
     if (isset($_GET['page_no']) && $_GET['page_no']!="") {
-        $page_no = $_GET['page_no'];
+        $page_no = (int)$_GET['page_no'];
     } else {
         $page_no = 1;
     }
@@ -167,12 +179,12 @@ function page()
     //tri par nom,ref....,
     $order = 'nom';
     if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-        $order = $_GET['orderBy'];
+        $order = input($_GET['orderBy']);
     }
     //tri asc desc
     $sortBy = array('DESC','ASC' );
     if (isset($_GET['sort'])&&in_array($_GET['sort'], $sortBy)) {
-        $ascdesc=($_GET['sort']=='ASC')? 'ASC' : 'DESC';
+        $ascdesc=input(($_GET['sort']=='ASC')? 'ASC' : 'DESC');
     } else {
         $ascdesc='ASC';
     }

@@ -97,6 +97,7 @@ class Book extends MODEL
         $result = $this->query("SELECT * FROM $this->table ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");
         return $result;
     }
+
     public function get_search($offset, $total_records_per_page, $order, $ascdesc, $search)
     {
         $result = $this->query("SELECT * FROM $this->table WHERE nom LIKE '$search' OR reference LIKE '$search' OR categorie LIKE '$search' ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");//OR reference LIKE $search OR categorie LIKE $search
@@ -106,6 +107,13 @@ class Book extends MODEL
     public function pagination()
     {
         $result_count = $this->query("SELECT COUNT(*) As total_records FROM $this->table");
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        return $total_records;
+    }
+    public function paginationsearch($search)
+    {
+        $result_count = $this->query("SELECT COUNT(*) As total_records FROM $this->table WHERE nom LIKE '$search' OR reference LIKE '$search' OR categorie LIKE '$search'");
         $total_records = mysqli_fetch_array($result_count);
         $total_records = $total_records['total_records'];
         return $total_records;

@@ -6,8 +6,8 @@ class CreateManager extends Database
         $conn = $this->dbConnect();
         $add = $conn->prepare("INSERT INTO livres (nom, reference, date_achat, date_garantie, prix,conseil, photo_ticket, photo,categorie) VALUES (:nom,:reference,:date_achat,:date_garantie,:prix,:conseil,:photo_ticket,:photo,:categorie) ");
 
-        $ticketname = $_FILES['ticket']['name'];
-        $photoname = $_FILES['photo']['name'];
+        $ticketname = input($_FILES['ticket']['name']);
+        $photoname = input($_FILES['photo']['name']);
 
         // Location
         $target_ticket = 'public/img/'.$ticketname;
