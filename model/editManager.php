@@ -47,14 +47,8 @@ class editManager extends Database
   echo "<p class='alert alert-success text-center p-2 m-0'>Book updated</p>";
   return $updatefunc;
 }
-//image management for edition
- public function editimg($id){
 
-        $updatefunc=$stmt->execute();
 
-        echo"<p class='alert alert-primary text-center p-2 m-0'>Book updated</p>";
-        return $updatefunc;
-    }
     //image management for edition
     public function editimg($id)
     {
