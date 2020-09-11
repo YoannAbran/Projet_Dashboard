@@ -9,9 +9,7 @@
     $search='';
   }
 ?>
-<div class="">
-  <h1>Home</h1>
-</div>
+
 <nav class="navbar navbar-light bg-light">
   <form class="form-inline" method="GET" action="index.php">
     <input type="hidden" name="action" value="listbook"/>
@@ -22,21 +20,31 @@
     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
   </form>
 </nav>
-<table class='table table-striped table-light'>
-          <thead>
+<table class='table table-responsive-md table-striped table-light shadow-sm'>
+          <thead class="thead-dark">
             <tr>
               <th class='text-center align-middle' scope='col'>#</th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=nom&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Nom</a></th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=reference&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Reference</a></th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=date_achat&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Achat</a></th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=date_garantie&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Garantie</a></th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=prix&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Prix d'achat</a></th>
-              <th class='text-center align-middle' scope='col'>Conseil</th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=nom&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Nom</a></th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=reference&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Reference</a></th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=date_achat&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Achat</a></th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=date_garantie&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Garantie</a></th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=prix&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Prix d'achat</a></th>
+
+              <th class='text-center align-middle ' scope='col'>Conseil</th>
+
               <th class='text-center align-middle' scope='col'>Ticket</th>
+
               <th class='text-center align-middle' scope='col'>Photo</th>
-              <th class='text-center align-middle' scope='col'><a class="text-dark" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=categorie&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Catégorie</a></th>
+
+              <th class='text-center align-middle' scope='col'><a class="text-light" href="<?php echo "index.php?action=listbook&search=".$search."&page_no=". $page_no."&orderBy=categorie&sort=".(($ascdesc=='ASC')? 'DESC' : 'ASC').""?>">Catégorie</a></th>
+
               <?php if (isset($_SESSION['isAdmin'])){
-              echo "<th class='text-center' scope='col'>Suppression</th>
+              echo "<th class='text-center align-middle' scope='col'>Suppression</th>
                 ";}?>
             </tr>
           </thead>
@@ -51,13 +59,21 @@ while($row = mysqli_fetch_array($books)){
         <?php if (isset($_SESSION['isAdmin'])){
         echo "<td class='text-center align-middle'><a class='text-dark' href='index.php?action=edit&id=".$row['id']."'>".htmlspecialchars($row['nom'])."</a></td>";}
         else {  echo "<td class='text-center align-middle'>".htmlspecialchars($row['nom'])."</td>";}?>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['reference']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['date_achat']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['date_garantie']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['prix']); ?></td>
-          <td class='text-center align-middle'><?php echo htmlspecialchars($row['conseil']); ?></td>
+
+          <td class='text-center align-middle text-truncate' style="max-width: 50px;"><?php echo htmlspecialchars($row['conseil']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['photo_ticket']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['photo']); ?></td>
+
           <td class='text-center align-middle'><?php echo htmlspecialchars($row['categorie']); ?></td>
         <?php    if (isset($_SESSION['isAdmin'])){
             echo "<td class='text-center align-middle'><form action ='index.php?action=delete&id=".$row['id']."' method='post' onsubmit='return submitResult();'><button class='btn btn-link'type='submit' name='suppr' value=''><i class='text-dark fas fa-trash-alt'></i></button></form></td>";}?>
