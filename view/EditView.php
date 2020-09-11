@@ -3,7 +3,8 @@
   session_start();
   session_regenerate_id();
   $id=(int) abs($_GET['id']);
-  foreach ($visuals as $visual) {}
+  foreach ($visuals as $visual) {
+  }
 
 ?>
     <form name="edition" enctype ="multipart/form-data" method="post" action="<?php echo htmlspecialchars('index.php?action=edit&id='.$id.'')?>">

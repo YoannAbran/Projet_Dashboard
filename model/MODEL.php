@@ -1,259 +1,275 @@
 <?php
 
-class MODEL {
-  private $server = 'localhost';
-  private $user = 'root';
-  private $password = '';
+class MODEL
+{
+    private $server = 'localhost';
+    private $user = 'root';
+    private $password = '';
 
-  protected $data_base;
-  protected $table;
-  protected $table_columns;
+    protected $data_base;
+    protected $table;
+    protected $table_columns;
 
-  public function query($sql, ...$bind_parameters) {
-    $conn = $this->connect();
-    if (!$conn) echo 'problem';
-
-    if (count($bind_parameters) === 0) {
-      if (!$stmt = $conn->prepare($sql)) {
-        if ($conn->error) echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
-        return FALSE;
-      }
-    }
-    else {
-      $parameters_types = "";
-      foreach ($bind_parameters as $value) {
-        if (gettype($value) === 'string') $parameters_types .= 's';
-        else if (gettype($value) === 'integer') $parameters_types .= 'i';
-        else if (gettype($value) === 'double') $parameters_types .= 'd';
-        else {
-          $type = gettype($value);
-          echo '<br>' . "Wrong parameter type at query: SQL: $sql TYPE: $type";
+    public function query($sql, ...$bind_parameters)
+    {
+        $conn = $this->connect();
+        if (!$conn) {
+            echo 'problem';
         }
-      }
-      if (!$stmt = $conn->prepare($sql)) {
-        echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
-        return FALSE;
-      }
-      if (!$stmt->bind_param($parameters_types, ...$bind_parameters)) {
-        echo '<br>' . "Statement bind_param ERROR: $stmt->error";
-        return FALSE;
-      }
+
+        if (count($bind_parameters) === 0) {
+            if (!$stmt = $conn->prepare($sql)) {
+                if ($conn->error) {
+                    echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
+                }
+                return false;
+            }
+        } else {
+            $parameters_types = "";
+            foreach ($bind_parameters as $value) {
+                if (gettype($value) === 'string') {
+                    $parameters_types .= 's';
+                } elseif (gettype($value) === 'integer') {
+                    $parameters_types .= 'i';
+                } elseif (gettype($value) === 'double') {
+                    $parameters_types .= 'd';
+                } else {
+                    $type = gettype($value);
+                    echo '<br>' . "Wrong parameter type at query: SQL: $sql TYPE: $type";
+                }
+            }
+            if (!$stmt = $conn->prepare($sql)) {
+                echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
+                return false;
+            }
+            if (!$stmt->bind_param($parameters_types, ...$bind_parameters)) {
+                echo '<br>' . "Statement bind_param ERROR: $stmt->error";
+                return false;
+            }
+        }
+
+        if (!$stmt->execute()) {
+            echo $sql;
+            echo '<br>' . "Statement execution ERROR: $stmt->error";
+            return false;
+        }
+        if (!$result = $stmt->get_result()) {
+            if ($stmt->error) {
+                echo '<br>' . "Statement getResult ERROR: $stmt->error";
+            }
+            return true;
+        }
+        return $result;
     }
 
-    if (!$stmt->execute()) {echo $sql;
-      echo '<br>' . "Statement execution ERROR: $stmt->error";
-      return FALSE;
-    }
-    if (!$result = $stmt->get_result()) {
-      if ($stmt->error) echo '<br>' . "Statement getResult ERROR: $stmt->error";
-      return TRUE;
-    }
-    return $result;
-  }
+    public function queryBlob($sql, $blob, ...$testers)
+    {
+        $types = "b";
 
-  public function queryBlob($sql, $blob, ...$testers) {
-    $types = "b";
+        foreach ($testers as $tester) {
+            if (gettype($tester) === 'string') {
+                $types .= 's';
+            } elseif (gettype($tester) === 'integer') {
+                $types .= 'i';
+            } elseif (gettype($tester) === 'double') {
+                $types .= 'd';
+            } else {
+                echo '<br>' . "Wrong type at queryBlob data type: " . gettype($tester);
+                return false;
+            }
+        }
 
-    foreach ($testers as $tester) {
-      if (gettype($tester) === 'string') $types .= 's';
-      else if (gettype($tester) === 'integer') $types .= 'i';
-      else if (gettype($tester) === 'double') $types .= 'd';
-      else {
-        echo '<br>' . "Wrong type at queryBlob data type: " . gettype($tester);
-        return FALSE;
-      }
-    }
+        $conn = $this->connect();
 
-    $conn = $this->connect();
+        if (!$stmt = $conn->prepare($sql)) {
+            echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
+            return false;
+        }
 
-    if (!$stmt = $conn->prepare($sql)) {
-      echo '<br>' . "SQL error. SQL: $sql ERROR: $conn->error";
-      return FALSE;
-    }
-
-    $null = NULL;
-    if (!$stmt->bind_param($types, $null, ...$testers)) {
-      echo '<br>' . "Statement bind_param ERROR: $stmt->error";
-      return FALSE;
-    }
-    if ($blob && !$stmt->send_long_data(0, $blob)) {
-      echo '<br>' . "Statement send long data ERROR: $stmt->error";
-      return FALSE;
-    }
-    if (!$stmt->execute()) {
-      echo '<br>' . "Statement execution ERROR: $stmt->error";
-      return FALSE;
-    }
-    return TRUE;
-  }
-
-  public function connect() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table) {
-      echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
-      return FALSE;
+        $null = null;
+        if (!$stmt->bind_param($types, $null, ...$testers)) {
+            echo '<br>' . "Statement bind_param ERROR: $stmt->error";
+            return false;
+        }
+        if ($blob && !$stmt->send_long_data(0, $blob)) {
+            echo '<br>' . "Statement send long data ERROR: $stmt->error";
+            return false;
+        }
+        if (!$stmt->execute()) {
+            echo '<br>' . "Statement execution ERROR: $stmt->error";
+            return false;
+        }
+        return true;
     }
 
-    $conn = new mysqli($this->server, $this->user, $this->password, $this->data_base);
+    public function connect()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table) {
+            echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
+            return false;
+        }
 
-    if ($conn->error) {
-      echo '<br>' . "Error on connection. class DBH function connect() ERROR: $conn->error";
-      return FALSE;
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->data_base);
+
+        if ($conn->error) {
+            echo '<br>' . "Error on connection. class DBH function connect() ERROR: $conn->error";
+            return false;
+        }
+
+        return $conn;
     }
 
-    return $conn;
-  }
+    public function createDataBase()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        $conn = new mysqli($this->server, $this->user, $this->password);
 
-  public function createDataBase() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    $conn = new mysqli($this->server, $this->user, $this->password);
+        if ($conn->error) {
+            echo '<br>' . "Error on connection. class DBH function createDataBase() ERROR: $conn->error";
+            return false;
+        }
 
-    if ($conn->error) {
-      echo '<br>' . "Error on connection. class DBH function createDataBase() ERROR: $conn->error";
-      return FALSE;
-    }
+        $sql = "CREATE DATABASE IF NOT EXISTS $this->data_base";
 
-    $sql = "CREATE DATABASE IF NOT EXISTS $this->data_base";
-
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function createDataBase() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
-    }
-    else {
-      return TRUE;
-    }
-  }
-
-  public function resetDataBase() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    $conn = new mysqli($server, $user, $password);
-
-    $sql = "DROP DATABASE IF EXISTS $this->data_base";
-
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function resetDataBase() SQL: $sql, ERROR: $conn->error";
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function createDataBase() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    $sql = "CREATE DATABASE IF NOT EXISTS $this->data_base";
+    public function resetDataBase()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        $conn = new mysqli($server, $user, $password);
 
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function resetDataBase() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
-    }
-    else {
-      return TRUE;
-    }
-  }
+        $sql = "DROP DATABASE IF EXISTS $this->data_base";
 
-  public function deleteDataBase() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    $conn = new mysqli($server, $user, $password);
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function resetDataBase() SQL: $sql, ERROR: $conn->error";
+        }
 
-    $sql = "DROP DATABASE IF EXISTS $this->data_base";
+        $sql = "CREATE DATABASE IF NOT EXISTS $this->data_base";
 
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function deleteDataBase() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
-    }
-    else {
-      return TRUE;
-    }
-  }
-
-  public function createTable() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table) {
-      echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table_columns) {
-      echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
-      return FALSE;
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function resetDataBase() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    $conn = $this->connect();
+    public function deleteDataBase()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        $conn = new mysqli($server, $user, $password);
 
-    $sql = "CREATE TABLE IF NOT EXISTS $this->table $this->table_columns";
+        $sql = "DROP DATABASE IF EXISTS $this->data_base";
 
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function createTable() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
-    }
-    else {
-      return TRUE;
-    }
-  }
-
-  public function resetTable() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table) {
-      echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table_columns) {
-      echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
-      return FALSE;
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function deleteDataBase() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    $conn = $this->connect();
+    public function createTable()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table) {
+            echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table_columns) {
+            echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
+            return false;
+        }
 
-    $sql = "DROP TABLE IF EXISTS $this->table";
+        $conn = $this->connect();
 
-    $conn->query($sql);
+        $sql = "CREATE TABLE IF NOT EXISTS $this->table $this->table_columns";
 
-    $sql = "CREATE TABLE IF NOT EXISTS $this->table $this->table_columns";
-
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function resetTable() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
-    }
-    else {
-      return TRUE;
-    }
-  }
-
-  public function deleteTable() {
-    if (!$this->data_base) {
-      echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table) {
-      echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
-      return FALSE;
-    }
-    if (!$this->table_columns) {
-      echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
-      return FALSE;
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function createTable() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    $conn = $this->connect();
+    public function resetTable()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table) {
+            echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table_columns) {
+            echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
+            return false;
+        }
 
-    $sql = "DROP TABLE IF EXISTS $this->table";
+        $conn = $this->connect();
 
-    if (!$conn->query($sql)) {
-      echo '<br>' . "Sql error! class DBH function deleteTable() SQL: $sql, ERROR: $conn->error";
-      return FALSE;
+        $sql = "DROP TABLE IF EXISTS $this->table";
+
+        $conn->query($sql);
+
+        $sql = "CREATE TABLE IF NOT EXISTS $this->table $this->table_columns";
+
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function resetTable() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
-    else {
-      return TRUE;
+
+    public function deleteTable()
+    {
+        if (!$this->data_base) {
+            echo '<br>' . "You have to specify a data base for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table) {
+            echo '<br>' . "You have to specify a table for class inheriting from MODEL.";
+            return false;
+        }
+        if (!$this->table_columns) {
+            echo '<br>' . "You have to specify the table columns for class inheriting from MODEL.";
+            return false;
+        }
+
+        $conn = $this->connect();
+
+        $sql = "DROP TABLE IF EXISTS $this->table";
+
+        if (!$conn->query($sql)) {
+            echo '<br>' . "Sql error! class DBH function deleteTable() SQL: $sql, ERROR: $conn->error";
+            return false;
+        } else {
+            return true;
+        }
     }
-  }
 }

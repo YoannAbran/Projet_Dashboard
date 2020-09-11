@@ -27,8 +27,8 @@ $title = "dashboard";
          </li>
         <?php
 
-        if (isset($_SESSION['isAdmin'])){
-          echo "
+        if (isset($_SESSION['isAdmin'])) {
+            echo "
 
 
           <li class='nav-item'>
@@ -38,7 +38,7 @@ $title = "dashboard";
        <li class='nav-item'>
           <a class='nav-link' href='" .htmlspecialchars('index.php?action=register')."'>Ajouter un admin</a>
         </li>";
-      }
+        }
          ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo htmlspecialchars('index.php?action=login')?>">Login</a>
@@ -52,7 +52,6 @@ $title = "dashboard";
   <?php
     if (isset($_SESSION['isAdmin'])) {
         echo "<p class='alert alert-info text-center p-0 m-0'>Welcome " . $_SESSION['authUser']. "</p>";
-
     }?>
 <?php echo $content ;?>
 <script>

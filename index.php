@@ -2,44 +2,32 @@
 require('controller/controller.php');
 require('controller/graphController.php');
 $action = array('insertnew','login','deco','register','edit','listbook','delete');
-if (isset($_GET['action']) && in_array($_GET['action'], $action)){
-
-  if ($_GET['action'] == 'insertnew') {
-    create();
-    require("view/CreateView.php");
-      }
-    else if ($_GET['action'] == 'login') {
-      require("view/LoginView.php");
-      loginConnexion();
-        }
-    else if ($_GET['action'] == 'deco') {
-      deconnexion();
-          }
-    else if ($_GET['action'] == 'register') {
-      require("view/RegisterView.php");
-      register();
-    }
-
-    else if ($_GET['action']=='edit'){          
-          controledit();
-          controleditimg();
-          controledisplay();
-      }
-        else if ($_GET['action']=='listbook'){
-
-          page();
-          // booksList();
-
-          }
-        else if ($_GET['action'] == 'delete') {
-          if (isset($_POST['suppr'])) {
+if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
+    if ($_GET['action'] == 'insertnew') {
+        create();
+        require("view/CreateView.php");
+    } elseif ($_GET['action'] == 'login') {
+        require("view/LoginView.php");
+        loginConnexion();
+    } elseif ($_GET['action'] == 'deco') {
+        deconnexion();
+    } elseif ($_GET['action'] == 'register') {
+        require("view/RegisterView.php");
+        register();
+    } elseif ($_GET['action']=='edit') {
+        controledit();
+        controleditimg();
+        controledisplay();
+    } elseif ($_GET['action']=='listbook') {
+        page();
+    // booksList();
+    } elseif ($_GET['action'] == 'delete') {
+        if (isset($_POST['suppr'])) {
             if (isset($_GET['id'])) {
-              bookDelete($_GET['id']);
+                bookDelete($_GET['id']);
             }
-          }
         }
-
-}
-else{
-require("view/IndexView.php");
+    }
+} else {
+    require("view/IndexView.php");
 }
