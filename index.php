@@ -20,10 +20,10 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)){
       register();
     }
 
-    else if ($_GET['action']=='edit'){
-          controledisplay();
+    else if ($_GET['action']=='edit'){          
           controledit();
           controleditimg();
+          controledisplay();
       }
         else if ($_GET['action']=='listbook'){
 

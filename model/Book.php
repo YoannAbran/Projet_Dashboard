@@ -83,6 +83,11 @@ class Book extends MODEL {
     $result = $this->query("SELECT * FROM $this->table ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");
     return $result;
   }
+  public function get_search($offset, $total_records_per_page,$order,$ascdesc,$search) {
+
+    $result = $this->query("SELECT * FROM $this->table WHERE nom LIKE '$search' OR reference LIKE '$search' OR categorie LIKE '$search' ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");//OR reference LIKE $search OR categorie LIKE $search  
+    return $result;
+  }
 
   public function pagination(){
 

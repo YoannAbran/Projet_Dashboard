@@ -129,8 +129,15 @@ function controleditimg() {
 //en poo class livres,
 function booksList($offset, $total_records_per_page,$order,$ascdesc)
 {
-  $booksManager = new Book(); // Création d'un objet
-  $books = $booksManager->get_all($offset, $total_records_per_page,$order,$ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
+  $booksManager = new Book();
+  if (isset($_GET['search'])){
+    $search = htmlspecialchars(addcslashes($_GET['search'],'_'));
+    $search="%".$search."%";
+    $books = $booksManager->get_search($offset, $total_records_per_page,$order,$ascdesc,$search);
+  } // Création d'un objet
+  else {
+    $books = $booksManager->get_all($offset, $total_records_per_page,$order,$ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
+  }
   // require('view/listView.php');
   return $books;
 }
