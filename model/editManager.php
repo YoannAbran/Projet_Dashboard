@@ -33,13 +33,22 @@ class editManager extends Database
      categorie = :categorie
      WHERE id = $id");
 
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':reference', $reference);
-        $stmt->bindParam(':date_achat', $date_achat);
-        $stmt->bindParam(':date_garantie', $date_garantie);
-        $stmt->bindParam(':prix', $prix);
-        $stmt->bindParam(':conseil', $conseil);
-        $stmt->bindParam(':categorie', $categorie);
+    $stmt->bindParam(':nom',$nom);
+    $stmt->bindParam(':reference',$reference);
+    $stmt->bindParam(':date_achat',$date_achat);
+    $stmt->bindParam(':date_garantie',$date_garantie);
+    $stmt->bindParam(':prix',$prix);
+    $stmt->bindParam(':conseil',$conseil);
+    $stmt->bindParam(':categorie',$categorie);
+
+    $updatefunc=$stmt->execute();
+
+  // echo"<font color = 'green'><br>Book's info UPDATED</font>";
+  echo "<p class='alert alert-success text-center p-2 m-0'>Book updated</p>";
+  return $updatefunc;
+}
+//image management for edition
+ public function editimg($id){
 
         $updatefunc=$stmt->execute();
 
