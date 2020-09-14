@@ -190,7 +190,7 @@ function page()
     }
     $books = booksList($offset, $total_records_per_page, $order, $ascdesc);
 
-    require('view/listView.php');
+    require('view/ListView.php');
 }
 
 function bookDelete($id)
