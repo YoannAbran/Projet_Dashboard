@@ -2,200 +2,222 @@
 require('controller/controller.php');
 
 
-class testgraph extends Database {
-  //work, recupere la somme des prix pae categorie
-  public function testcat(){
-$conn = $this->dbConnect();
-$sql = $conn->prepare("SELECT ROUND(SUM(prix),2) AS prixcat, categorie FROM livres GROUP BY categorie ");
-$sql->execute();
-$prix=$sql->fetchAll();
-return $prix;
-}
-//work, recupere le prix total des livres
-public function testtot(){
-$db=$this->dbConnect();
-$sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres");
-$sql->execute();
-$prixtot=$sql->fetch();
-return $prixtot;
-}
-//recupere combien et le nombre de livre par nom
-public function teststock(){
-$db=$this->dbConnect();
-$sql = $db->prepare("SELECT COUNT(*) AS nomC, nom FROM livres
+class testgraph extends Database
+{
+    //work, recupere la somme des prix pae categorie
+    public function testcat()
+    {
+        $conn = $this->dbConnect();
+        $sql = $conn->prepare("SELECT ROUND(SUM(prix),2) AS prixcat, categorie FROM livres GROUP BY categorie ");
+        $sql->execute();
+        $prix=$sql->fetchAll();
+        return $prix;
+    }
+    //work, recupere le prix total des livres
+    public function testtot()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres");
+        $sql->execute();
+        $prixtot=$sql->fetch();
+        return $prixtot;
+    }
+    //recupere combien et le nombre de livre par nom
+    public function teststock()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT COUNT(*) AS nomC, nom FROM livres
 GROUP BY nom");
-$sql->execute();
-$nbrenom=$sql->fetchAll();
-return $nbrenom;
-}
-public function nmbreachat(){
-$db=$this->dbConnect();
-$sql = $db->prepare("SELECT COUNT(*) AS achat FROM livres
+        $sql->execute();
+        $nbrenom=$sql->fetchAll();
+        return $nbrenom;
+    }
+    public function nmbreachat()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT COUNT(*) AS achat FROM livres
 ");
-$sql->execute();
-$nbrachat=$sql->fetchAll();
-return $nbrachat;
-}
+        $sql->execute();
+        $nbrachat=$sql->fetchAll();
+        return $nbrachat;
+    }
 
-//recup tout dans la table vente_direct
-public function getnomvente(){
-  $db=$this->dbConnect();
-$sql = $db->prepare("SELECT * FROM vente");
-$sql->execute();
-$nomvente=$sql->fetchAll();
-return $nomvente;
-}
+    //recup tout dans la table vente_direct
+    public function getnomvente()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT * FROM vente");
+        $sql->execute();
+        $nomvente=$sql->fetchAll();
+        return $nomvente;
+    }
 
-//insert nouveau livre dans la table vente update si le livre existe deja
-public function insertvente($nom,$stock){
-  $db=$this->dbConnect();
-  $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (:nom,:stock,:prix_vente,:nbre_vente)
+    //insert nouveau livre dans la table vente update si le livre existe deja
+    public function insertvente($nom, $stock)
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("INSERT INTO vente (nom,stock,prix_vente,nbre_vente) VALUES (:nom,:stock,:prix_vente,:nbre_vente)
   ON DUPLICATE KEY UPDATE stock = :stock, prix_vente = :prix_vente, nbre_vente = :nbre_vente");
-  $prix_vente=rand(6,12);
-  $nbrevente=rand(3,20);
-  $add=$sql->execute(array(
+        $prix_vente=rand(6, 12);
+        $nbrevente=rand(3, 20);
+        $add=$sql->execute(array(
       ':nom'=>$nom,
       ':stock'=>$stock,
       ':prix_vente'=>$prix_vente,
       ':nbre_vente'=>$nbrevente
   ));
-  return $add;
-}
+        return $add;
+    }
 
-//recup et calcul le nombre de vente et le prix total des vente par livre
-public function gettotalvente(){
-  $db=$this->dbConnect();
-  $sql = $db->prepare("SELECT ROUND(SUM(prix_vente),2) AS prix_vente,ROUND(SUM(nbre_vente),2) AS nbre_vente FROM vente");
-  $sql->execute();
-  $totalvente=$sql->fetch();
-  return $totalvente;
-}
-//recup mois annee table livres
-public function getmonth(){
-  $db=$this->dbConnect();
-  $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year,ROUND(SUM(prix),2) AS prixcat, categorie FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY mois ");
-  $sql->execute();
-  $month=$sql->fetchAll();
-  return $month;
-}
-public function prixtotyear(){
-$db=$this->dbConnect();
-$sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31'");
-$sql->execute();
-$prixtotyear=$sql->fetch();
-return $prixtotyear;
-}
+    //recup et calcul le nombre de vente et le prix total des vente par livre
+    public function gettotalvente()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT ROUND(SUM(prix_vente),2) AS prix_vente,ROUND(SUM(nbre_vente),2) AS nbre_vente FROM vente");
+        $sql->execute();
+        $totalvente=$sql->fetch();
+        return $totalvente;
+    }
+    //recup mois annee table livres
+    public function getmonth()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT MONTH(date_achat) AS mois, YEAR(date_achat) AS year,ROUND(SUM(prix),2) AS prixcat, categorie FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31' GROUP BY mois ");
+        $sql->execute();
+        $month=$sql->fetchAll();
+        return $month;
+    }
+    public function prixtotyear()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT ROUND(SUM(prix),2) AS prixtotal FROM livres WHERE date_achat BETWEEN '2020-01-01' AND '2020-12-31'");
+        $sql->execute();
+        $prixtotyear=$sql->fetch();
+        return $prixtotyear;
+    }
 }//fin CLASS
 
 //recup mois
-function recupmonth(){
-  $test = new testgraph;
-  $month = $test->getmonth();
-  foreach ($month as $mois) {
-    echo " *".$mois['mois']." / ";
-    echo $mois['year']." : ";
-    echo $mois['prixcat']." / ";
-    echo $mois['categorie']."<br>";
-
-  }
+function recupmonth()
+{
+    $test = new testgraph;
+    $month = $test->getmonth();
+    foreach ($month as $mois) {
+        echo " *".$mois['mois']." / ";
+        echo $mois['year']." : ";
+        echo $mois['prixcat']." / ";
+        echo $mois['categorie']."<br>";
+    }
 }
 //recup le nombre de vente total
-function nbretotalvente(){
-  $test=new testgraph;
-  $totalvente=$test->gettotalvente();
-  echo $totalvente['nbre_vente'];
+function nbretotalvente()
+{
+    $test=new testgraph;
+    $totalvente=$test->gettotalvente();
+    echo $totalvente['nbre_vente'];
 }
-function nbretotalachat(){
-  $test=new testgraph;
-  $nbreachat=$test->nmbreachat();
-  echo $nbreachat['achat'];
+function nbretotalachat()
+{
+    $test=new testgraph;
+    $nbreachat=$test->nmbreachat();
+    echo $nbreachat['achat'];
 }
 
 // recup le prix total des vente
-function prixtotalvente(){
-  $test=new testgraph;
-  $totalvente=$test->gettotalvente();
+function prixtotalvente()
+{
+    $test=new testgraph;
+    $totalvente=$test->gettotalvente();
     echo $totalvente['prix_vente']*$totalvente['nbre_vente'];
 }
 
 //recup le prix total d'achat
-function testctotgraph(){
-$test=new testgraph;
-$prix=$test->testtot();
-echo $prix['prixtotal'];
+function testctotgraph()
+{
+    $test=new testgraph;
+    $prix=$test->testtot();
+    echo $prix['prixtotal'];
 }
 
 //recup les categorie
-function testcatgraph(){
-$test=new testgraph;
-$prix=$test->testcat();
-foreach ($prix as $pri) {
-  echo "'".$pri['categorie']."',";
-}
+function testcatgraph()
+{
+    $test=new testgraph;
+    $prix=$test->testcat();
+    foreach ($prix as $pri) {
+        echo "'".$pri['categorie']."',";
+    }
 }
 
 //recup prix total d'achat par categorie
-function testprix(){
-$test=new testgraph;
-$prix=$test->testcat();
-foreach ($prix as $pri) {
-  echo $pri['prixcat'].",";
-}
+function testprix()
+{
+    $test=new testgraph;
+    $prix=$test->testcat();
+    foreach ($prix as $pri) {
+        echo $pri['prixcat'].",";
+    }
 }
 
 // liste par nom + nombre de livre avec le meme nom
-function nbrenom(){
-$test=new testgraph;
-$noms=$test->teststock();
-foreach ($noms as $nom) {
-  echo $nom['nom']."/";
-echo $nom['nomC'].";";
-}
+function nbrenom()
+{
+    $test=new testgraph;
+    $noms=$test->teststock();
+    foreach ($noms as $nom) {
+        echo $nom['nom']."/";
+        echo $nom['nomC'].";";
+    }
 }
 
 //recup tout dans la table vente
-function nomvente(){
-$test=new testgraph;
-$nomvente=$test->getnomvente();
-foreach ($nomvente as $vente) {
-  echo  $vente['nom'].",";
-  echo $vente['stock'].",";
-    echo $vente['prix_vente'].",";
-    echo $vente['nbre_vente'].",";
-    echo $vente['prix_vente']*$vente['nbre_vente']."/";
-}
+function nomvente()
+{
+    $test=new testgraph;
+    $nomvente=$test->getnomvente();
+    foreach ($nomvente as $vente) {
+        echo  $vente['nom'].",";
+        echo $vente['stock'].",";
+        echo $vente['prix_vente'].",";
+        echo $vente['nbre_vente'].",";
+        echo $vente['prix_vente']*$vente['nbre_vente']."/";
+    }
 }
 
 //recup le nom des livre ds la table vente
-function labelvente(){
-  $test=new testgraph;
-  $nomvente=$test->getnomvente();
-  foreach ($nomvente as $vente) {
-    echo  "'".$vente['nom']."',";
-  }
+function labelvente()
+{
+    $test=new testgraph;
+    $nomvente=$test->getnomvente();
+    foreach ($nomvente as $vente) {
+        echo  "'".$vente['nom']."',";
+    }
 }
 
 //recup le nombre de vente
-function nbrevente(){
-  $test=new testgraph;
-  $nomvente=$test->getnomvente();
-  foreach ($nomvente as $vente) {
-    echo  $vente['nbre_vente'].",";
-  }
+function nbrevente()
+{
+    $test=new testgraph;
+    $nomvente=$test->getnomvente();
+    foreach ($nomvente as $vente) {
+        echo  $vente['nbre_vente'].",";
+    }
 }
 
 //recupère le prix total des vente par livre
-function vente(){
-  $test=new testgraph;
-  $nomvente=$test->getnomvente();
-  foreach ($nomvente as $vente) {
-    echo  $vente['prix_vente']*$vente['nbre_vente'].",";
-  }
+function vente()
+{
+    $test=new testgraph;
+    $nomvente=$test->getnomvente();
+    foreach ($nomvente as $vente) {
+        echo  $vente['prix_vente']*$vente['nbre_vente'].",";
+    }
 }
-function getpritotyear(){
-  $test = new testgraph;
-  $yeartot = $test->prixtotyear();
-  echo "'".$yeartot['prixtotal']."'";
+function getpritotyear()
+{
+    $test = new testgraph;
+    $yeartot = $test->prixtotyear();
+    echo "'".$yeartot['prixtotal']."'";
 }
 //fonction pour mettre a jour table vente
 // function addvente(){

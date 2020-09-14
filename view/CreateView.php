@@ -1,6 +1,7 @@
 <?php ob_start();
 session_start();
 session_regenerate_id();?>
+
 <form class="container-fluid pt-5 d-flex flex-column align-items-center" action='<?php  htmlspecialchars('index.php?action=insertnew')?>' method="post" enctype='multipart/form-data'>
 <link rel='stylesheet' type='text/css' href=public/css/createStyle.css />
 
