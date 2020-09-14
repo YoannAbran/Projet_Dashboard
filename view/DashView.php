@@ -2,186 +2,110 @@
   ob_start();
   session_start();
   session_regenerate_id();
+
 ?>
 
 
-    <!-- <div id="viewport">
-      <!-- Sidebar -->
-      <!--   <div id="sidebar">
-        <header>
-          <a href="#"><span id="boo">Boo</span>King</a>
-        </header>
-        <ul class="nav">
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-link"></i> Tableaux
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-widgets"></i> Catégories
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-calendar"></i> Emails
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-info-outline"></i> Notifications
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-settings"></i> Paramètres
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-comment-more"></i> Contact
-            </a>
-          </li>
-        </ul>
-      </div>-->
+
       <!-- Content -->
-      <div id="content">
-        <div class="container-top">
-          <!-- Plugins searchbar/notifications/mails/login admin/  -->
+      <div class="container-fluid d-flex justify-content-center row" id="content">
+
+
+
+
+
+        <div id="graph" class="container-fluid d-flex flex-column align-items-center row p-2 col-md-9">
+          <div class="container d-flex justify-content-center col row p-2 ">
+          <div class="container border border-dark col-lg-6 p-2">
+            <canvas id="myChart" ></canvas>
+          </div>
+
+          <div class="container border border-dark col-lg-6 p-2" >
+            <canvas class="p-2" id="myChart2" ></canvas>
+          </div>
         </div>
-
-<div class="card-deck row-cols-lg-3 row-cols-md-1">
-<div class="col">
-
-    <div class="card ">
-      <div class="card-body">
-        <img src="template/img/money.png">
-        <h5 class="card-title">Ventes</h5>
+          <div class="container d-flex justify-content-center col row  p-2">
+          <div class="container border border-dark col-lg-6 p-2">
+            <canvas class="p-2" id="myChart3" ></canvas>
+          </div>
+          <div class="container border border-dark col-lg-6 p-2">
+            <canvas class="p-2" id="myChart4" ></canvas>
+        </div>
       </div>
-      <canvas id="myChart" ></canvas>
-    </div>
-</div>
+          </div>
 
-<div class="col">
-  <div class="card ">
-    <div class="card-body">
-      <img src="template/img/trafic.png">
-      <h5 class="card-title">Ventes/Catégories</h5>
-    </div>
-    <canvas id="myChart2" ></canvas>
-  </div>
-</div>
+          <div class="container col-md-3" id="list_book">
 
-<div class="col">
-  <div class="card ">
-    <div class="card-body">
-      <img src="template/img/sell.png">
-      <h5 class="card-title">Traffic</h5>
-    </div>
-      <canvas id="myChart3" ></canvas>
-  </div>
-</div>
-
-<div class="col">
-  <div class="card ">
-    <div class="card-body">
-      <img src="template/img/tear.png">
-      <h5 class="card-title">Fin de garantie</h5>
-    </div>
-  <canvas id="myChart4" ></canvas>
-  </div>
-</div>
-</div>
-
-
-        <!-- <div class="" id="list_book">
-          <div class="card-deck" >
-            <div class="card cardlist">
-              <div class="card-body">
-                <img src="template/img/crown.png" alt="...">
-                <table class="table">
-                  <div class="title">
-                  <img id="crown" src="template/img/crown1.png">
+            <div class="container d-flex flex-column align-items-center justify-content-center">
+                  <img id='king' src="template/img/crown.png" alt="...">
+                    <div class="title">
+                  <!-- <img id="crown" src="template/img/crown1.png"> -->
                   <h5 class="card-title titlelist">Best-Sellers</h5>
                   </div>
-                  <thead>
-                    <tr>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                      <th scope="col">Titre</th>
-                      <th scope="col">Auteur</th>
-                      <th scope="col">Prix</th>
-                      <th scope="col">Ventes</th>
-                      <th scope="col"></th>
-                      <th scope="col">Revendeurs</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="gold">
-                      <th scope="row">1</th>
-                      <td><img src="template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="template/img/cart.png"></td>
-                    </tr>
-                    <tr id="silver">
-                      <th scope="row">2</th>
-                      <td><img src="template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="template/img/cart.png"></td>
-                    </tr>
-                    <tr id="bronze">
-                      <th scope="row">3</th>
-                      <td><img src="template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="template/img/cart.png"></td>
-                    </tr>
-                    <tr id="endlist">
-                      <th scope="row">4</th>
-                      <td><img src="template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="template/img/cart.png"></td>
-                    </tr>
-                    <tr id="endlist">
-                      <th scope="row">5</th>
-                      <td><img src="template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="template/img/cart.png"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div> -->
 
+                  <table class="table table-responsive table-sm text-center mx-auto">
+
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Ventes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      $count = 0;
+                      foreach ($ventetop as $top) {
+                        $count = $count + 1;
+                        echo "<tr id='";
+                        if ($count==1){
+                          echo"gold";
+                        }elseif ($count == 2) {
+                          echo"silver";
+                        }elseif ($count == 3) {
+                        echo"bronze";
+                      }else {
+                        echo"endlist";
+                      }
+                        echo"'>";
+                        echo "<th scope='row'>".$count."</th>";
+                        echo "<td><img src='template/img/livre.jpg'></td>";
+                        echo "<td>".$top['nom']."</td>";
+                        echo "<td>".$top['prix_vente']."</td>";
+                        echo "<td>".$top['nbre_vente']."</td>";
+                        echo "</tr>";
+                      }
+
+                       ?>
+
+                    </tbody>
+                  </table>
+
+                  <div class="simple_data  m-2 p-2 text-center  rounded-pill ">
+                    <p>Total des ventes : <span class="font-weight-bolder"><?php echo prixtotalvente();?></span> €<br></p>
+                    </div>
+                  <div class="simple_data  m-2 p-2 text-center rounded-pill">
+                      <p>Total des achat : <span class="font-weight-bolder"><?php echo testctotgraph();?></span> €<br></p>
+                    </div>
+                  <div class="simple_data  m-2 p-2 text-center rounded-pill">
+                    <p>Nombre d'achat : <span class="font-weight-bolder"><?php echo nbretotalachat();?></span><br></p>
+                    </div>
+                  <div class="simple_data  m-2 p-2 text-center rounded-pill">
+                    <p>Nombre de vente : <span class="font-weight-bolder"><?php echo nbretotalvente();?></span><br></p>
+                    </div>
+                  </div>
+
+
+                </div>
         </div>
-      </div>
-    </div>
+
+
+
+
+
+
 
     <script>
     function submitResult() {
@@ -213,13 +137,13 @@
       }]
     },
     // Configuration options go here
-    options: {}
+    options: { }
     });
 
     var ctx = document.getElementById('myChart2').getContext('2d');
     var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'doughnut',
+    type: 'horizontalBar',
     // The data for our dataset
     data: {
       labels: [<?php echo labelvente();?>],/*'total'*/
@@ -236,7 +160,19 @@
       }]
     },
     // Configuration options go here
-    options: {}
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Nombre de ventes'
+      },
+      scales: {
+                 xAxes: [{
+                     ticks: {
+                         beginAtZero: true
+                     }
+                 }]
+             } }
     });
 
     var ctx = document.getElementById('myChart3').getContext('2d');
@@ -258,7 +194,19 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Prix total des ventes (€)'
+      },
+      scales: {
+                 yAxes: [{
+                     ticks: {
+                         beginAtZero: true
+                     }
+                 }]
+             }}
     });
     var ctx = document.getElementById('myChart4').getContext('2d');
     var chart = new Chart(ctx, {
@@ -281,7 +229,18 @@
 
     // Configuration options go here
     options: {
-
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Nombre d\'achat total par catégorie sur l\'année 2020'
+      },
+      scales: {
+                 yAxes: [{
+                     ticks: {
+                         beginAtZero: true
+                     }
+                 }]
+             }
     }
     });
     //random color rgba

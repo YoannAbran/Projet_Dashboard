@@ -142,3 +142,11 @@ function vente()
         echo  $vente['prix_vente']*$vente['nbre_vente'].",";
     }
 }
+
+function top5control()
+{
+    $test=new testgraph;
+    $ventetop=$test->top5();
+      require("view/DashView.php");
+
+}

@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark  text-light">
     <a class="navbar-brand" href="index.php">Booking</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class='nav-item'>
+      <ul class="navbar-nav text-light">
+        <li class='nav-item '>
            <a class='nav-link' href='<?php echo htmlspecialchars('index.php?action=listbook')?>'>Liste des livres</a>
          </li>
         <?php

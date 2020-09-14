@@ -29,7 +29,9 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
         }
     }
     else if($_GET['action'] == 'dash') {
-      require("view/DashView.php");
+
+    
+      top5control();
     }
 } else {
     require("view/IndexView.php");
