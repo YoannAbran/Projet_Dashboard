@@ -58,24 +58,24 @@
                       <?php
                       $count = 0;
                       foreach ($ventetop as $top) {
-                        $count = $count + 1;
-                        echo "<tr id='";
-                        if ($count==1){
-                          echo"gold";
-                        }elseif ($count == 2) {
-                          echo"silver";
-                        }elseif ($count == 3) {
-                        echo"bronze";
-                      }else {
-                        echo"endlist";
-                      }
-                        echo"'>";
-                        echo "<th scope='row'>".$count."</th>";
-                        echo "<td><img src='template/img/livre.jpg'></td>";
-                        echo "<td>".$top['nom']."</td>";
-                        echo "<td>".$top['prix_vente']."</td>";
-                        echo "<td>".$top['nbre_vente']."</td>";
-                        echo "</tr>";
+                          $count = $count + 1;
+                          echo "<tr id='";
+                          if ($count==1) {
+                              echo"gold";
+                          } elseif ($count == 2) {
+                              echo"silver";
+                          } elseif ($count == 3) {
+                              echo"bronze";
+                          } else {
+                              echo"endlist";
+                          }
+                          echo"'>";
+                          echo "<th scope='row'>".$count."</th>";
+                          echo "<td><img src='template/img/livre.jpg'></td>";
+                          echo "<td>".$top['nom']."</td>";
+                          echo "<td>".$top['prix_vente']."</td>";
+                          echo "<td>".$top['nbre_vente']."</td>";
+                          echo "</tr>";
                       }
 
                        ?>
@@ -137,7 +137,7 @@
       }]
     },
     // Configuration options go here
-    options: { }
+    options: { defaultFontColor: 'black' }
     });
 
     var ctx = document.getElementById('myChart2').getContext('2d');
@@ -161,6 +161,7 @@
     },
     // Configuration options go here
     options: {
+      defaultFontColor: 'black',
       legend: { display: false },
       title: {
         display: true,
@@ -195,6 +196,7 @@
 
     // Configuration options go here
     options: {
+      defaultFontColor: 'black',
       legend: { display: false },
       title: {
         display: true,
@@ -229,6 +231,7 @@
 
     // Configuration options go here
     options: {
+      defaultFontColor: 'black',
       legend: { display: false },
       title: {
         display: true,
