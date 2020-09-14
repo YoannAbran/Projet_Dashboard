@@ -3,9 +3,6 @@
   session_start();
   session_regenerate_id();
 ?>
-<div class="">
-  <h1>Home</h1>
-</div>
 
 <div class="container-fluid d-flex flex-column">
   <div class="container d-flex">

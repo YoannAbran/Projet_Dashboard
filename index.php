@@ -1,7 +1,7 @@
 <?php
 require('controller/controller.php');
 require('controller/graphController.php');
-$action = array('insertnew','login','deco','register','edit','listbook','delete');
+$action = array('insertnew','login','deco','register','edit','listbook','delete','dash');
 if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
     if ($_GET['action'] == 'insertnew') {
         create();
@@ -27,6 +27,9 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
                 bookDelete($_GET['id']);
             }
         }
+    }
+    else if($_GET['action'] == 'dash') {
+      require("view/DashView.php");
     }
 } else {
     require("view/IndexView.php");
