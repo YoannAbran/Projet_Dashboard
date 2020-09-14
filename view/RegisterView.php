@@ -2,6 +2,10 @@
 session_start();
 session_regenerate_id();?>
 
+
+<link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href=public/css/registerStyle.css />
+
 <form class="box" action="<?php htmlspecialchars('index.php?action=register')?>" method="post">
     <h1 class="box-title">Ajouter un admin</h1>
     <div class="m-4">
