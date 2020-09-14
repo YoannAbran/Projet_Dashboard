@@ -1,19 +1,48 @@
-body{
+body{background: linear-gradient(52deg, #3aa4d5, #19d2e6, #267cf3, #ddd019, #ee3f2d);
+    background-size: 1000% 1000%;
 
+    -webkit-animation: AnimationName 22s ease infinite;
+    -moz-animation: AnimationName 22s ease infinite;
+    -o-animation: AnimationName 22s ease infinite;
+    animation: AnimationName 22s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 83%}
+    50%{background-position:100% 18%}
+    100%{background-position:0% 83%}
 }
 
 h1{
   text-align: center;
-  margin-top: 30px;
+  margin-top: 70px;
   margin-bottom: 90px;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   letter-spacing: 2px;
+  color: white;
+  position: relative;
+  animation-name: subtext;
+  animation-duration: 1s;
+  opacity: 1;
+  text-decoration: underline;
 }
 
-.box{
-  
-}
-
-input{
-
+@keyframes subtext {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
 }

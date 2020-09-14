@@ -28,3 +28,25 @@ body{
    50%{background-position:100% 96%}
    100%{background-position:0% 5%}
 }
+
+
+h1{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  margin-top: 70px;
+  margin-bottom: 90px;
+  letter-spacing: 2px;
+  color: white;
+  text-decoration: underline;
+  opacity: 1;
+  animation-name: subtext;
+  animation-duration: 1s;
+}
+
+@keyframes subtext{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+label{
+  color: white;
+}

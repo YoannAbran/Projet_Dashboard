@@ -7,8 +7,10 @@ session_regenerate_id();?>
 <link rel='stylesheet' type='text/css' href=public/css/registerStyle.css />
 
 <form class="box" action="<?php htmlspecialchars('index.php?action=register')?>" method="post">
-    <h1 class="box-title">Ajouter un admin</h1>
-    <div class="m-4">
+
+    <h1 class="box-title"><span>Ajouter un admin<span></h1>
+
+    <div class="m-4 d-flex justify-content-center" id="theforms">
 
   <input type="text" class="box-input" name="nom" placeholder="Nom d'utilisateur" required />
     <input type="email" class="box-input" name="email" placeholder="Email" required />

@@ -1,6 +1,22 @@
 /*Gradient animé*/
-*{
+
+h1{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  text-align: center;
+  color: white;
+  margin-top: 70px;
+  text-decoration: underline;
+  opacity: 1;
+  animation-name: subtext;
+  animation-duration: 1s;
 }
+
+@keyframes subtext{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+
 body{
   width: 100%;
    height: 100%;
@@ -46,7 +62,8 @@ body{
 
 
 #editform p{
-  font-family: 'Gentium Book Basic', serif;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  letter-spacing: 7px;
 }
 
 #editform li{
