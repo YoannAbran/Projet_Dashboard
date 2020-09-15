@@ -98,4 +98,14 @@ GROUP BY nom");
         $nbrachat=$sql->fetch();
         return $nbrachat;
     }
+
+    public function top5()
+    {
+        $db=$this->dbConnect();
+        $sql = $db->prepare("SELECT *  FROM vente ORDER BY nbre_vente DESC LIMIT 5
+");
+        $sql->execute();
+        $top5=$sql->fetchAll();
+        return $top5;
+    }
 }//fin CLASS
