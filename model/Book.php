@@ -103,6 +103,16 @@ class Book extends MODEL
         $result = $this->query("SELECT * FROM $this->table WHERE nom LIKE '$search' OR reference LIKE '$search' OR categorie LIKE '$search' ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ");//OR reference LIKE $search OR categorie LIKE $search
         return $result;
     }
+    public function get_cat($offset, $total_records_per_page, $order, $ascdesc, $cat)
+    {
+        $result = $this->query("SELECT * FROM $this->table WHERE categorie=? ORDER BY $order $ascdesc LIMIT $offset, $total_records_per_page ",$cat);//OR reference LIKE $search OR categorie LIKE $search
+        return $result;
+    }
+    public function get_all_cat()
+    {
+        $result = $this->query("SELECT categorie FROM $this->table GROUP BY categorie");//OR reference LIKE $search OR categorie LIKE $search
+        return $result;
+    }
 
     public function pagination()
     {
@@ -114,6 +124,13 @@ class Book extends MODEL
     public function paginationsearch($search)
     {
         $result_count = $this->query("SELECT COUNT(*) As total_records FROM $this->table WHERE nom LIKE '$search' OR reference LIKE '$search' OR categorie LIKE '$search'");
+        $total_records = mysqli_fetch_array($result_count);
+        $total_records = $total_records['total_records'];
+        return $total_records;
+    }
+    public function paginationcat($cat)
+    {
+        $result_count = $this->query("SELECT COUNT(*) As total_records FROM $this->table WHERE categorie = ?",$cat);
         $total_records = mysqli_fetch_array($result_count);
         $total_records = $total_records['total_records'];
         return $total_records;

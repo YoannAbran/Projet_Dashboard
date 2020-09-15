@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Yoann Abran, Kévin Nguma, Warrenn Maunier">
+  <meta name="author" content="Yoann Abran, Kévin Nguma, Warren Maunier">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,7 +11,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="https://kit.fontawesome.com/3bd5358b64.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/test.css">
+    <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
   <nav id="navtop" class="navbar navbar-expand-lg navbar-dark  text-light">

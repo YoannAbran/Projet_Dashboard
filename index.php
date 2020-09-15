@@ -19,6 +19,7 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
         controleditimg();
         controledisplay();
     } elseif ($_GET['action']=='listbook') {
+        
         page();
     // booksList();
     } elseif ($_GET['action'] == 'delete') {
@@ -30,7 +31,7 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
     }
     else if($_GET['action'] == 'dash') {
 
-    
+
       top5control();
     }
 } else {
