@@ -31,7 +31,8 @@ function create()
         header("Location: index.php", true, 303);
         exit;
     } else {
-        echo "<p class='alert alert-danger text-center p-2 m-0'>Veuillez renseigner tous les champs</p>";
+        echo "<div class='alert alert-danger alert-dismissible text-center p-2 m-0'><p>Veuillez renseigner tous les champs</p><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span>
+  </button></div>";
     }
 }
 

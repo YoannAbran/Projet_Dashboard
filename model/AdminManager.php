@@ -25,19 +25,13 @@ class AdminManager extends Database
     public function isAdmin()
     {
         if ($_SESSION['isAdmin']) {
-            echo "<p class='alert alert-secondary text-center p-0 m-0'>Welcome " . $_SESSION['authUser']. "</p>";
+            echo "<div class='alert bg-transparent text-center font-weight-bolder p-0 m-0'><p>Welcome " . $_SESSION['authUser']. "</p></div>";
         } else {
             echo "Get out you're not authorized";
             header('Location: index.php?action=login');
             exit;
         }
     }
-
-    // public function loginCO(){
-    //   if (isset($_POST["user"]) && isset($_POST["password"])){
-    //   $this->getLogin($_POST["user"],$_POST["password"]);
-    // }
-    // }
 
     public function deco()
     {
