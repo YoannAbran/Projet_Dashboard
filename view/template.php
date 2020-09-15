@@ -14,7 +14,6 @@ $title = "dashboard";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<<<<<<< HEAD
     <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body><?php
@@ -24,30 +23,13 @@ $title = "dashboard";
   }?>
   <nav id="navstyle" class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">Navbar</a>
-=======
-  <script src="https://kit.fontawesome.com/3bd5358b64.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/main.css">
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark  text-light">
-    <a class="navbar-brand" href="index.php">Booking</a>
->>>>>>> ea90533c5376cedbadadcf487d96f5eb447a9414
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-<<<<<<< HEAD
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class='nav-item'>
-           <a class='nav-link' href='index.php?action=listbook'>Liste des livres</a>
-=======
       <ul class="navbar-nav text-light">
         <li class='nav-item '>
            <a class='nav-link' href='<?php echo htmlspecialchars('index.php?action=listbook')?>'>Liste des livres</a>
->>>>>>> ea90533c5376cedbadadcf487d96f5eb447a9414
          </li>
         <?php
 
