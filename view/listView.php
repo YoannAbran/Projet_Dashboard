@@ -110,7 +110,7 @@ while ($row = mysqli_fetch_array($books)) {
     <?php if ($page_no < $total_no_of_pages) {
         echo "<li><a class=' text-dark page-link' href='index.php?action=listbook&search=$search&page_no=$total_no_of_pages&orderBy=$order&sort=$ascdesc'>Last &rsaquo;&rsaquo;</a></li>";
     }
-       ?>
+     ?>
     </ul>
   </nav>
   </div>
