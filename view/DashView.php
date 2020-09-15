@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="main.css">
-  </head>
+<?php
+  ob_start();
+  session_start();
+  session_regenerate_id();
+?>
 
-  <body>
+    <link rel="stylesheet" href="main.css">
 
     <div id="viewport">
       <!-- Sidebar -->
-      <div id="sidebar">
+      <!-- <div id="sidebar">
         <header>
           <a href="#"><span id="boo">Boo</span>King</a>
         </header>
@@ -53,7 +49,7 @@
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
       <!-- Content -->
       <div id="content">
         <div class="container-top">
@@ -184,7 +180,7 @@
         </div>
       </div>
     </div>
-
-
-  </body>
-</html>
+    
+    <?php
+      $content = ob_get_clean();
+      require('template.php');

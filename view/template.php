@@ -12,13 +12,14 @@ $title = "dashboard";
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/3bd5358b64.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body><?php
   if (isset($_SESSION['isAdmin'])) {
       echo "<p class='alert alert-secondary text-center p-0 m-0'>Welcome " . $_SESSION['authUser']. "</p>";
 
   }?>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id="navstyle" class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
