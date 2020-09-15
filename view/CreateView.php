@@ -2,9 +2,9 @@
 session_start();
 session_regenerate_id();?>
 
-<div id="particles-js"></div>
-<div id=container>
 
+<div id=container>
+<div id="particles-js"></div>
 <form class="container-fluid pt-5 d-flex flex-column align-items-center" action='<?php  htmlspecialchars('index.php?action=insertnew')?>' method="post" enctype='multipart/form-data'>
 <link rel='stylesheet' type='text/css' href=public/css/createStyle.css />
 <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
