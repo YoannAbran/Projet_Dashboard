@@ -137,15 +137,17 @@ function controleditimg()
 function booksList($offset, $total_records_per_page, $order, $ascdesc)
 {
     $booksManager = new Book();
+
+
+
     if (isset($_GET['search']) && $_GET['search']!='') {
         $search = input(addcslashes($_GET['search'], '_'));
         $search="%".$search."%";
         $books = $booksManager->get_search($offset, $total_records_per_page, $order, $ascdesc, $search);
-    }
-    else if(isset($_GET['cat']) && $_GET['cat']!=''){
-      $cat = input($_GET['cat']);
-      $books = $booksManager-> get_cat($offset, $total_records_per_page, $order, $ascdesc, $cat);// Création d'un objet
-  }  else {
+    } elseif (isset($_GET['cat']) && $_GET['cat']!='') {
+        $cat = input($_GET['cat']);
+        $books = $booksManager-> get_cat($offset, $total_records_per_page, $order, $ascdesc, $cat);
+    } else {
         $books = $booksManager->get_all($offset, $total_records_per_page, $order, $ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
     }
     // require('view/listView.php');
@@ -160,10 +162,9 @@ function page()
         $search = input(addcslashes($_GET['search'], '_'));
         $search="%".$search."%";
         $resultats= $page->paginationsearch($search);
-    }
-    else if(isset($_GET['cat'])&& $_GET['cat']!=""){
-      $cat = input($_GET['cat']);
-      $resultats = $page ->paginationcat($cat);
+    } elseif (isset($_GET['cat'])&& $_GET['cat']!="") {
+        $cat = input($_GET['cat']);
+        $resultats = $page ->paginationcat($cat);
     } else {
         $resultats= $page->pagination();
     }
@@ -195,15 +196,16 @@ function page()
     } else {
         $ascdesc='ASC';
     }
-    $allcat=all_cat();
+    $allcat = all_cat();
     $books = booksList($offset, $total_records_per_page, $order, $ascdesc);
 
     require('view/ListView.php');
 }
-function all_cat(){
-  $bookManager = new Book();
-  $allcat = $bookManager->get_all_cat();
-  return $allcat;
+function all_cat()
+{
+    $bookManager = new Book();
+    $allcat = $bookManager->get_all_cat();
+    return $allcat;
 }
 
 function bookDelete($id)
