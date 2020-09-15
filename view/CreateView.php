@@ -74,7 +74,7 @@ session_regenerate_id();?>
   <button type="submit" name="submit" class="btn btn-primary">Ajouter</button>
 </form>
 
-<script type="text/javascript" src="public/script/particles.js"></script>
+<script type="text/javascript" src="public/script/particles0.js"></script>
 <script type="text/javascript" src="public/script/app.js"></script>
 
 <?php
