@@ -11,10 +11,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="https://kit.fontawesome.com/3bd5358b64.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/test.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark  text-light">
+  <nav id="navtop" class="navbar navbar-expand-lg navbar-dark  text-light">
     <a class="navbar-brand" href="index.php">Booking</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
