@@ -1,10 +1,8 @@
-/* #viewport {
-  padding-left: 250px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-} */
+/* Navbar Style */
+
+#navstyle {
+  background-color: #302A2A;
+}
 
 body {
   background: rgb(255,215,156);
@@ -17,98 +15,10 @@ body {
   margin-right: 0;
 }
 
-/* Sidebar Styles */
-
-#sidebar {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 250px;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #FFD79C;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  /* border-right: 1px solid #302A2A; */
-  box-shadow: 1px 1px 10px black;
-}
-
-#sidebar header {
-  background-color: #FFD79C;
-  font-size: 20px;
-  line-height: 52px;
-  text-align: center;
-  box-shadow: 2px 2px 6px black;
-}
-
-#boo {
-  color: #53600E;
-  font-weight: bold;
-  font-size: 30px;
-}
-
-#sidebar header a {
-  color: #60320A;
-  display: block;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 30px;
-  height: 10vh;
-}
-
-
-#sidebar header a:hover {
-  color: #FCBE39;
-}
-
-#sidebar .nav{
-  flex-direction: column;
-}
-
-#sidebar .nav li{
-  display:flex;
-}
-
-#sidebar .nav a{
-  background: none;
-  /* border-bottom: 1px solid #455A64; */
-
-  box-shadow: 1px 1px 10px  #FFD79C;
-  color: #302A2A;
-  font-size: 14px;
-  padding: 16px 24px;
-  width:100%;
-}
-
-#sidebar .nav a:hover{
-  background: #302A2A;
-  color: #CFD8DC;
-  text-decoration: none;
-}
-
-#sidebar .nav a i{
-  margin-right: 16px;
-}
-
-/* Container Admin */
-
-.container-top {
-  background-color: #302A2A;
-  width: 100%;
-  display: flex;
-  height: 10vh;
-
-}
-
-/* Fin container admin */
 
 /* Titre dashboard */
 
 .dash-title {
-  margin-left: 300px;
   margin-top: 2.5vh;
 }
 #subtitle {
@@ -129,7 +39,6 @@ body {
 }
 .card-deck {
 
-  margin-left : 300px;
   margin-right: 50px;
 }
 
@@ -160,7 +69,7 @@ body {
 
 .cardlist {
   background: #302A2A;
-  margin-left: 300px;
+
 
 }
 
