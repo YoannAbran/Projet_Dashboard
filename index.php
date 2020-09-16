@@ -26,6 +26,7 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
         if (isset($_POST['suppr'])) {
             if (isset($_GET['id'])) {
                 bookDelete($_GET['id']);
+                page();;
             }
         }
     }

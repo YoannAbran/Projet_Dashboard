@@ -213,7 +213,7 @@ function bookDelete($id)
 {
     $booksManager = new Book();
     $book = $booksManager->remove($_GET['id']);
-    booksList();
+
 }
 
 function bookPage()
