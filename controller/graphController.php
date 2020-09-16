@@ -147,6 +147,6 @@ function top5control()
 {
     $test=new testgraph;
     $ventetop=$test->top5();
-      require("view/DashView.php");
+      require("view/IndexView.php");
 
 }

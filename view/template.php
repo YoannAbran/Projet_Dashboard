@@ -23,7 +23,7 @@ $title = "dashboard";
 
   }?>
   <nav id="navstyle" class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="view/DashView.php"><img src="./template/img/logo.png"></a>
+    <a class="navbar-brand" href="index.php"><img src="./template/img/logo.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -53,9 +53,7 @@ $title = "dashboard";
         <li class="nav-item">
           <a class="nav-link" href="index.php?action=deco">Logout</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo htmlspecialchars('index.php?action=dash')?>">dashtest</a>
-        </li>
+        
       </ul>
     </div>
   </nav>
