@@ -31,7 +31,7 @@ class editManager extends Database
      prix = :prix,
      conseil = :conseil,
      categorie = :categorie
-     WHERE id = $id");
+     WHERE id = :id");
 
     $stmt->bindParam(':nom',$nom);
     $stmt->bindParam(':reference',$reference);
@@ -40,6 +40,7 @@ class editManager extends Database
     $stmt->bindParam(':prix',$prix);
     $stmt->bindParam(':conseil',$conseil);
     $stmt->bindParam(':categorie',$categorie);
+    $stmt->bindParam(':id',$id);
 
     $updatefunc=$stmt->execute();
 
@@ -53,7 +54,7 @@ class editManager extends Database
     public function editimg($id)
     {
         $conn = $this->dbConnect();
-        $edit3 = $conn->prepare("UPDATE livres SET photo_ticket = :photo_ticket, photo = :photo WHERE id=$id");
+        $edit3 = $conn->prepare("UPDATE livres SET photo_ticket = :photo_ticket, photo = :photo WHERE id=:id");
         $ticket = input($_POST['old_ticket']);
         $photo = input($_POST['old_photo']);
 
@@ -87,15 +88,15 @@ class editManager extends Database
         // $edit3->bindParam(':photo_ticket',$target_ticket, PDO::PARAM_STR);
         // $edit3->bindParam(':photo',$target_photo, PDO::PARAM_STR);
 
-        $editnew = $edit3->execute(array(':photo_ticket' => $target_ticket, ':photo' => $target_photo));
+        $editnew = $edit3->execute(array(':photo_ticket' => $target_ticket, ':photo' => $target_photo, ':id' => $id);
 
         return $editnew;
     }
     public function displayimg($id)
     {
         $conn = $this-> dbConnect();
-        $imagesarray = $conn->prepare("SELECT * FROM `livres` WHERE id=$id");
-        $imagesarray -> execute();
+        $imagesarray = $conn->prepare("SELECT * FROM `livres` WHERE id=:id");
+        $imagesarray -> execute([':id'=>$id]);
         $displayer = $imagesarray -> fetchAll();
         return $displayer;
     }

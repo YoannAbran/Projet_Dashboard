@@ -137,7 +137,7 @@ function controleditimg()
 //en poo class livres,
 function booksList($offset, $total_records_per_page, $order, $ascdesc)
 {
-    $booksManager = new Book();
+    $booksManager = new ListManager();
 
 
 
@@ -149,21 +149,22 @@ function booksList($offset, $total_records_per_page, $order, $ascdesc)
         $cat = input($_GET['cat']);
         $books = $booksManager-> get_cat($offset, $total_records_per_page, $order, $ascdesc, $cat);
     } else {
-        $books = $booksManager->get_all($offset, $total_records_per_page, $order, $ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
+        $books = $booksManager->selectAll($offset, $total_records_per_page, $order, $ascdesc);  // Appel la fonction qui renvoie toutes les données sur les livres en bdd
     }
     // require('view/listView.php');
     return $books;
+    echo selectAll();
 }
 
 function page()
 {
-    $page = new book();
+    $page = new ListManager();
 
     if (isset($_GET['search'])&& $_GET['search']!="") {
         $search = input(addcslashes($_GET['search'], '_'));
         $search="%".$search."%";
         $resultats= $page->paginationsearch($search);
-    } elseif (isset($_GET['cat'])&& $_GET['cat']!="") {
+    } elseif (isset($_GET['cat']) && $_GET['cat']!='') {
         $cat = input($_GET['cat']);
         $resultats = $page ->paginationcat($cat);
     } else {
@@ -192,7 +193,7 @@ function page()
     }
     //tri asc desc
     $sortBy = array('DESC','ASC' );
-    if (isset($_GET['sort'])&&in_array($_GET['sort'], $sortBy)) {
+    if (isset($_GET['sort']) && in_array($_GET['sort'], $sortBy)) {
         $ascdesc=input(($_GET['sort']=='ASC')? 'ASC' : 'DESC');
     } else {
         $ascdesc='ASC';
@@ -204,21 +205,22 @@ function page()
 }
 function all_cat()
 {
-    $bookManager = new Book();
+    $bookManager = new ListManager();
     $allcat = $bookManager->get_all_cat();
+    $allcat = $allcat->fetchAll();
     return $allcat;
 }
 
 function bookDelete($id)
 {
-    $booksManager = new Book();
+    $booksManager = new ListManager();
     $book = $booksManager->remove($_GET['id']);
-    booksList();
+
 }
 
 function bookPage()
 {
-    $booksManager = new Book();
+    $booksManager = new ListManager();
     $book = $booksManager->get_id($id);
     require('');
 }

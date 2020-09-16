@@ -19,21 +19,18 @@ if (isset($_GET['action']) && in_array($_GET['action'], $action)) {
         controleditimg();
         controledisplay();
     } elseif ($_GET['action']=='listbook') {
-        
         page();
     // booksList();
     } elseif ($_GET['action'] == 'delete') {
         if (isset($_POST['suppr'])) {
             if (isset($_GET['id'])) {
                 bookDelete($_GET['id']);
+                page();
             }
         }
     }
-    else if($_GET['action'] == 'dash') {
 
-
-      top5control();
-    }
 } else {
-    require("view/IndexView.php");
+    top5control();
+
 }

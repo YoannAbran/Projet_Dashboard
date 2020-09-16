@@ -102,7 +102,7 @@ GROUP BY nom");
     public function top5()
     {
         $db=$this->dbConnect();
-        $sql = $db->prepare("SELECT *  FROM vente ORDER BY nbre_vente DESC LIMIT 5
+        $sql = $db->prepare("SELECT *  FROM vente ORDER BY nbre_vente DESC LIMIT 10
 ");
         $sql->execute();
         $top5=$sql->fetchAll();

@@ -32,12 +32,14 @@ if (isset($_GET['cat'])) {
     <input type="hidden" name="search" value="<?php $search ?>"/>
     <select class="p-2" name="cat">
       <option value="">Catégorie</option>
-<?php while ($row = mysqli_fetch_array($allcat)) { ?>
+<?php foreach ($allcat as $row)
+ { ?>
       <option value="<?php echo $row['categorie']; ?>"><?php echo $row['categorie']; ?></option>
     <?php } ?>
     </select>
     <button class="btn btn-outline-dark p-2 m-2 " type="submit">select</button>
   </form>
+
 
 </nav>
 <table class='table table-responsive-md table-striped table-light shadow-sm'>
@@ -73,7 +75,7 @@ if (isset($_GET['cat'])) {
 
 
 <?php
-while ($row = mysqli_fetch_array($books)) {
+foreach ($books as $row)  {
     ?>
       <tr>
         <th scope="row"><?php echo $row['id']; ?></th>

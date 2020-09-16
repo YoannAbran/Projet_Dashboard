@@ -3,7 +3,7 @@ abstract class Database
 {
     protected function dbConnect()
     {
-        $servername = "127.0.0.1";
+        $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "projet_dashboard";
