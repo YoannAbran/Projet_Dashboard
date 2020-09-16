@@ -8,176 +8,8 @@
     <link rel="stylesheet" href="main.css">
 
     <div id="viewport">
-      <!-- Sidebar -->
-      <!-- <div id="sidebar">
-        <header>
-          <a href="#"><span id="boo">Boo</span>King</a>
-        </header>
-        <ul class="nav">
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-link"></i> Tableaux
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-widgets"></i> Catégories
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-calendar"></i> Emails
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-info-outline"></i> Notifications
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-settings"></i> Paramètres
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="zmdi zmdi-comment-more"></i> Contact
-            </a>
-          </li>
-        </ul>
-      </div> -->
+
       <!-- Content -->
-      <div id="content">
-        <div class="container-top">
-          <!-- Plugins searchbar/notifications/mails/login admin/  -->
-        </div>
-
-
-
-        <!-- <div class="card-deck">
-          <div class="card">
-            <div class="card-body">
-              <img src="../template/img/money.png">
-              <h5 class="card-title">Ventes</h5>
-            </div>
-            <img src="../template/img/testgraph.jpg" class="card-img-top" alt="...">
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <img src="../template/img/trafic.png">
-              <h5 class="card-title">Ventes/Catégories</h5>
-            </div>
-            <img src="../template/img/testgraph.jpg" class="card-img-top" alt="...">
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <img src="../template/img/sell.png">
-              <h5 class="card-title">Traffic</h5>
-            </div>
-            <img src="../template/img/testgraph.jpg" class="card-img-top" alt="...">
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <img src="../template/img/tear.png">
-              <h5 class="card-title">Fin de garantie</h5>
-            </div>
-            <img src="../template/img/testgraph.jpg" class="card-img-top" alt="...">
-          </div>
-        </div> -->
-
-
-          <!-- <div class="card-deck">
-            <div class="card cardlist">
-              <div class="card-body"> -->
-                <!-- <img src="../template/img/crown.png" alt="..."> -->
-                <!-- <table class="table">
-                  <div class="title">
-                  <img id="crown" src="../template/img/crown1.png">
-                  <h5 class="card-title titlelist">Best-Sellers</h5>
-                  </div>
-                  <thead>
-                    <tr>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                      <th scope="col">Titre</th>
-                      <th scope="col">Auteur</th>
-                      <th scope="col">Prix</th>
-                      <th scope="col">Ventes</th>
-                      <th scope="col"></th>
-                      <th scope="col">Revendeurs</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="gold">
-                      <th scope="row">1</th>
-                      <td><img src="../template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="../template/img/cart.png"></td>
-                    </tr>
-                    <tr id="silver">
-                      <th scope="row">2</th>
-                      <td><img src="../template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="../template/img/cart.png"></td>
-                    </tr>
-                    <tr id="bronze">
-                      <th scope="row">3</th>
-                      <td><img src="../template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="../template/img/cart.png"></td>
-                    </tr>
-                    <tr id="endlist">
-                      <th scope="row">4</th>
-                      <td><img src="../template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="../template/img/cart.png"></td>
-                    </tr>
-                    <tr id="endlist">
-                      <th scope="row">5</th>
-                      <td><img src="../template/img/livre.jpg"></td>
-                      <td>L'odysée</td>
-                      <td>Homère</td>
-                      <td>9.99€</td>
-                      <td>2748</td>
-                      <td><button type="button" class="btn btn-success">Voir page</button></td>
-                      <td><img src="../template/img/cart.png"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div> -->
-            <!-- <div class="card">
-              <div class="card-body" style="border-radius: 0%;">
-                <h5 class="card-title">Stocks</h5>
-              </div>
-              <img src="../template/img/stats.jpg" class="card-img-top" alt="..." style="border-radius:0%;">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
 
     <div class="dash-title">
       <h1> Dashboard </h1>
@@ -186,10 +18,6 @@
 
       <!-- Content -->
       <div class="container-fluid d-flex justify-content-center row" id="content">
-
-
-
-
 
         <div id="graph" class="container-fluid d-flex flex-column align-items-center row p-2 col-md-9">
           <div class="container d-flex justify-content-center col row p-2 ">
@@ -268,8 +96,8 @@
             <!-- <div class="card bg-dark text-white vw-100"> -->
               <!-- <div class="card-img-overlay"> -->
                 <div class="row text-center container-fluid vw-100">
-                  <div id="text-appear">
-                    <ul class="text hidden d-flex">
+                  <div id="text-appear" class="">
+                    <ul class="text hidden d-flex pl-0 pb-4">
                       <li class="ghost">S</li>
                       <li class="ghost">C</li>
                       <li class="ghost">O</li>
@@ -282,28 +110,28 @@
                       <li class="ghost">D</li>
                     </ul>
                   </div>
-                  <div class="col">
+                  <div class="pt-2 col">
                     <div class="counter">
                       <i class="fa fa-line-chart fasize"></i>
                       <h2 class="timer count-title count-number" data-to="<?php echo prixtotalvente();?>" data-speed="2500"></h2>
                       <p class="count-text ">Montant des ventes/€</p>
                     </div>
                     </div>
-                      <div class="col">
+                      <div class="pt-2 col">
                         <div class="counter">
                           <i class="fa fa-shopping-basket fasize"></i>
                           <h2 class="timer count-title count-number" data-to="<?php echo testctotgraph();?>" data-speed="2500"></h2>
                           <p class="count-text ">Montant des achats/€</p>
                         </div>
                       </div>
-                      <div class="col">
+                      <div class="pt-2 col">
                         <div class="counter">
                           <i class="fa fa-truck fasize"></i>
                           <h2 class="timer count-title count-number" data-to="<?php echo nbretotalachat();?>" data-speed="2500"></h2>
                           <p class="count-text ">Stock: </p>
                         </div>
                       </div>
-                        <div class="col">
+                        <div class="pt-2 col">
                           <div class="counter">
                             <i class="fa fa-handshake-o fasize"></i>
                             <h2 class="timer count-title count-number" data-to="<?php echo    nbretotalvente();?>" data-speed="2500"></h2>
